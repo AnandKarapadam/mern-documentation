@@ -1,0 +1,51 @@
+GIT
+Git is a distributed version control system that allows developers to track changes in an application, collaborate with others, and manage different versions of their code efficiently.
+
+1.Stage (add)(git add <filename>)(git add .)
+ It is area where the changes are stored before committing them to the repository.
+
+2.Commit (git commit -m 'Added login feature').
+  Commit is a record of changes saved in Git along with a message describing those changes.
+
+3.Git log(git log).
+ To list all commit history.
+
+4.git diff 
+ To see unstaged changes.
+
+5.git show <commit>
+ To see the details about the commit (commit id, name, data,message, changes).
+
+6.Branching.
+ We can work on features without affecting the main code.
+git branch              # list all branches
+git branch <name>       # create a new branch
+git checkout <name>     # switch to a branch
+git checkout -b <name>  # create and switch to a new branch
+git switch <name>       # (modern way) switch branches
+git switch -c <name>   # create and switch branch.
+git merge <branch>      # merge branch into current branch
+git branch -d <name>    # delete a branch
+
+6.Undo/fix mistakes.
+git reset <file>         # Unstage file
+ It is used to undo changes by moving the current branch to a previous commit.
+ 1.soft reset(git reset --soft <commit>) -> keeps the changes in staging area.(Use when you want to redo commits).
+ 
+ A --- B --- C (HEAD)
+ file.txt → added line "hello"
+ git add file.txt
+ git reset --soft A
+ A (HEAD)
+
+ Commits B and C are removed from branch history, file.text, B and C become staged. when i commit(D) D = combined changes of B + C + your file.txt.
+ git reset --mixed B - to remove the changes from B.
+ 
+git checkout -- <file>   # Discard changes
+git revert <commit_id>   # Undo safely
+git reset --hard HEAD    # Delete all local changes. git reset --hard moves the current branch to a previous commit and deletes all changes in both the staging area and working directory.
+
+7.Temporary save the changes.
+git stash                # Save changes(Modified files, Staged changes).
+git stash list           # View stash
+git stash apply          # Apply stash

@@ -1,0 +1,604 @@
+NodeJS Topics
+1.What is node.js?
+2.REPL 
+3.NPX vs NPM 
+4.Modules (core module,third party modules).
+5.Nodemon
+6.Package.json vs package-lock.json
+7.Event Loop
+8.Libuv
+9.Event module (Event emitter).
+10.Streams (Readable stream, Writable Streams, Duplex Streams , Transform Streams).
+11.Stateless Protocol(http).
+12.StateFull Interaction.
+13.HTTP module (methods).
+14.MIME (Multipurpose Internet Mail Extension)(tells which format of data).
+15.Encryption vs Hashing.
+16.Concurrency vs Parallelism.
+17.Cluster Module.
+18.Child Process.
+19.Worker Threads.
+20.Thread Pool.
+21.Option method(Preflight request).
+22.Buffer.
+23.Crypto module.
+24.Scaffolding.
+25.Dotenv.
+26.Process.nextTick()
+27.Dynamic Routing(Path Parameters).
+28.Query Parameters.
+29.Route Chaining.
+30.Middlewares (Application level, Router, Custom, Error, built-in).
+31.CORS(CORS is enforced by the browser (client-side), but configured on the server.).
+32.SetHeader vs WriteHeader.
+33.Headers.
+34.Cron Job.
+35.Token interospection.
+36.Setimmediate function.
+37.Rate Limiting.
+38.JWT.
+39.Event-Driven-Architecture
+40.App.Local.
+41.Socket.
+42.Express.urlEncoded vs Express.json()
+43.Spawn, Fork , exec (child process).
+44.Fs Module
+45.REST APIs
+46.Authentication vs Authorization.
+47.sessions vs cookies.
+48.BodyParser.
+49.Content Negotiation(decides which data).
+50.Execfile vs Exec.
+51.Middleware Chaining.
+52.Sanitization.
+53.NVM
+54.Environment Variables.
+55.Status Codes.
+56.app.set() vs app.use()
+57.Process vs Threads.
+58.fs vs fs/promise.
+59.websockets vs socket.io.
+60.Polling phase.
+61.Long polling.
+62.server-sent-events.
+63.Long polling vs Websockets vs Server-Sent-Events.
+64.Environment Variables, dotenv package,--env-file flag.
+65.No cache middleware.
+66.Salting.
+67.REST API principles.
+68.Import vs Require.
+69.__directory and Absolute vs Relative path.
+70.CSRF (cross-site request forgery).
+
+1.What is Node.js?
+ Node.js is a js runtime environment that allow as to write and execute js code outside the browers. It is built in chrome's v8 engine, which compiles js into machine code, making it faster and effient.
+ Pros->Fast Execution, Asychronous non-blocking.
+ Cons->Single Threaded, Not suitable for CPU-intensive tasks. 
+
+2.REPL (Read Evaluation Print Loop)("node").
+ NodeJs provides a REPL environment where we can test, and execute js code directly in terminal.
+
+3.NPM vs NPX.
+NPM(Node Package Manager) -> That allow as to install ane manage external dependenices and libraries in our project.
+NPX(Node Package Executer) -> It allow as to run and execute packages directly without installing them globally.
+
+4.Modules.
+ Modules help us to organize code into smaller, reusable and maintainable files.
+ i.Core Modules/Built-in-modules -> Modules provided by Node.js.
+ ii.Local Modules  -> Created by us in the project(module.exports.add=(a,b)=>a+b); const Math = require('./math') math.add(10,20)//30;
+ iii.Third Party Modules -> External modules that install in our project (express).
+
+5.Nodemon
+ Monitor our code whenever changes happens restart the app.
+
+6.Package.json vs Package-lock.json.
+Package.json -> It contains the metadata about the project and list of dependencis.
+Package-lock.json -> It ensure right version of dependenices are installed.Lock the correct version of dependenices.
+
+7.Event Loop.
+ Asychronous task are handled by event loop. It has five phases:
+ -> Microtask(process.nexttick(higher priority ,promises))
+ -> Timer callback(settimeout,setInterval)
+ -> I/O callback (fs, reading or writing).
+ -> Check queue (Setimmediate).
+ -> Close queue (socket.on(),server.on()).
+
+8.Libuv
+ It is a C library in Node.js that implements/manages event loop. Thread Pool for blocking task (default 4 libuv threads).
+
+9.Events Module(event emitter).
+ Allow us to create,listen or emit custom events or named events.
+
+  let eventemitter = reqire('events');
+  let emitter = eventemitter();
+
+  emitter.on('greet',(name)=>{console.log(name)});
+  emitter.emit('greet','anand');
+
+10.Streams
+ Streams let as to process large files in chunks small or units instead of loading them directly in memory at once. Handled by buffer class.
+ Reduces memory usage by reusing the memory.
+ Helps to handle large data efficiently and improves perfomance.
+ 1.Readable Sterams -> For reading a big file.
+ 2.Writable Streams -> For writing a big file.
+ 3.Duplex Streams -> For reading and writing.
+ 4.Transform Streams -> To update streams while reading or writing.
+
+11.Stateless Protocols(every http requests are stateless).
+Protocols where each request from a client to a server is independent it does not depend or track the previous reqeust that clients make.
+
+12.StateFull Protocols(FTP(file transfer protocol),TCP(Transmission Controll Protocol)).
+Protocols that keeps track of previous requests from the client. Server remember the state of client.
+
+13.HTTP module.
+ Built-in module that allow as to handle http requests and responses.
+
+    let http = require('http');
+    let server = http.createServer((req,res)=>{
+        res.write("hello");
+        res.end();
+    })
+
+    server.listen(3000,()=>{
+        console.log('Server running')
+    })
+
+14.MIME (Multipurpose Internet Mail Extension)
+ It tells the browser which type of data is being send so it knows how to handle it.
+ The browser must know: is it html? is it json? is it an image?
+
+15.Encryption vs Hashing.
+Encryption -> Converting a data into a code format it can be reversed back(decrypt) using a key.(https)
+Hashing -> Convert data into a fixed string, not reversible used for passwords and sensitive data.
+
+16.Concurrency vs Parallelism
+Concurrency(handles) -> Handling multiple tasks at same time.Achieved by Event Loop, Async- Await, Callback, Promises.
+Parallelism(executes) -> Executes multiple tasks at same time(parallely) using multiple CPU cores.
+    i.Worker Threads -> Allow Nodejs to run javascript in multiple threads, enabling true parallism. They can share memory.
+    ii.Cluster Module -> Used to create multiple nodejs process to utilize multiple CPU cores.
+    iii.Child Process -> used to create new process that run independently that execute external scripts, shell commands in node application.
+    iv.Thread Pooling -> Internal pool used by libuv for running tasks in background. By default 4-threads.
+
+17. Cluster Module
+ Creates multiple node.js process to utilize multiple CPU cores.
+
+18.Child Process
+ Creates new process runs independently to handle external scripts, shell commands in node.js application.
+
+19.Worker Thread.
+ Allow node.js to run js in multiple threads.
+ const {Worker} = require('worker_threads');
+
+ function runWorker(num){
+  return new Promise((resolve,reject)=>{
+    let worker = new Worker('./worker.js',{workerData:num});
+
+    worker.on('message',resolve);
+    worker.on('error',reject);
+  })
+ }
+
+ (async ()=>{
+  let results = await Promise.all([runWorker(1000),runWorker(2000),runWorker(3000)]);
+  console.log(results);
+ })
+
+ //worker.js
+
+ const {parentPort,workerData} = require('worker_threads');
+
+ function heavyTask(num){
+  let sum = 0;
+  for(let i=0;i<num;i++){
+    sum+=i;
+  }
+  return sum;
+ }
+
+ let result = heavyTask(workerData);
+
+ parentPort.postMessage(result);
+
+
+  
+
+20.Thread Pooling 
+ Precreated threads by libuv(default 4 threads) to perfome multiple tasks instead of creating new thread everytime.
+
+21. Option Method.
+ To check which types of http methods and options are allowed for a specific resource.Mainly used in CORS.
+
+ Preflight Request.
+  Before sending the actual reqeust brower sends option request to check this request is allowed for the specific resource.
+  Done by useing option method.
+
+22.Buffer 
+ Buffer is used to store and handle bynary data directly in memory. Used in streams to store binary data of large file.
+ let bi = new Buffer("hello");
+
+23.Crypto
+ Built in module that helps to hash and encrypt data , decrypt data.
+   crypto.createHash("sha256").update("password").digest("hex");
+
+24.Scaffolding(npx express-generator)
+ Process of automatically creating initial structure and boilerplate code of application.
+
+25.Dotenv
+ Is used to store sensitive data instead of hard coding also is used to create environment variables.
+
+26.Process.nextTick()(can block event loop(starvation))
+ It is the higher priority asynchronous callback that executes right after call stack is empty.
+
+ Process.nextTick(()=>{
+    console.log("Next Tick");
+ })
+
+ 27.Dynamic Routing
+  Way to create routes where part of URL is dynamic variable.
+  :id → dynamic parameter
+   req.params.id → access the value
+ Achieved by using route/path parameters.
+
+
+ 28.Query Parameters(filtering,sorting,searching).
+ Used to send aditional optional data to the server.
+ we can access by req.query.id;
+
+ 29.Route Chaining.
+  Way to create chains of http methods. 
+
+  let app = express();
+
+  app.route('/users').get().post().put()
+
+30.Middleware 
+ It a function that run between request and response cycle in express application.
+ a.Application level
+  Runs on every request and response.
+  app.use((req,res,next)=>{
+    next();
+  })
+
+ b.Router level Middleware
+  Middleware for specific Routes. Applies on a specific middleware.
+
+  router.use((req,res,next)=>{
+    next();
+  })
+  modules.exports = router;
+
+  app.use("/user",router);
+ 
+ c.Built-in middleware.
+  Express.urlEncoded(), express.json();
+
+ 
+ d.Third-party middleware
+  morgan,cors.
+
+ e.Error handling Middleware
+  app.use((err,req,res,next)=>{
+    console.log(err);
+    res.send(500).send("error happend")
+  })
+
+31.CORS (Cross Orign Resource Sharing)
+ Security mechanism used by browers to control requests between different origins(protocol+domain+port).
+
+ let cors = require("cors");
+ app.use(cors());
+
+32.SetHeader() vs WriteHeader()
+SetHeader -> used to set a single header at a time res.setHeader("Content-Type","application/json") res.setHeader("Authorization","Bearer token")
+WriteHeader -> used to set status code+ multiple headers at a time res.writeHead(200, {"Content-Type": "application/json","Authorization": "Bearer token"});
+Header-> headers have the metadata about the req or res.
+
+33.Headers
+ Headers have the metadata about the req and res, describes things like : 
+ -> Which type data is send, who sent it, how it should be handled.
+
+34.Cron Job
+ It is used to schedule a task on a specific time.(Daily emails,daily notificatins)
+
+35.Token interospection
+ Checking Validation of token in the backend by asking Authorization server.
+
+36.Setimmediate function.
+ Asychronous function that runs right after i/o operations end and before close queue begins execution.
+ setImmediate(()=>{
+    console.log("Set immediate");
+ })  
+
+37.Rate Limiting 
+ Way to limit the number of request a user/client can make at a particular time.
+
+    let rateLimiterStore = {};
+
+    function rateLimiter(req,res,next){
+        let ip = req.ip;
+        let currentTime = Date.now();
+        let windowTime = 60*1000;
+        
+        if(!rateLimiterStore[ip]){
+            rateLimiterStore[ip] = [];
+        }
+
+        rateLimiterStore[ip] = rateLimiterStore[ip].filter((timestamp)=>currentTime-timestamp<windowTime);
+
+        if(rateLimiterStore[ip].length>=9){
+            return res.status(429).json({message:"Too many requests"});
+        }
+        rateLimiterStore[ip].push(currentTime);
+        next();
+    }
+
+38.JWT (Json Web Token)
+  Secure way to transmit infomation between client and server as a json object.
+  Has three parts: header(metadata about token):payload(actual data):signature(verify)
+
+
+39.Event-Driven-Architecture
+ Architecture that works based up on event occures.
+
+40.App.local
+ It is used to store data, that data is available across the node application.
+
+ app.locals.name = "anandKV";
+ console.log(app.locals.name)//anandKV
+
+41.Socket.
+ Allows two systems to communicate each other by sending and reciving data.
+
+42.express.urlEncoded vs express.json();
+express.urlEncoded()-> is the way to parse url encoded data parses form data.(req.body).{extended:true}->allow parsing nested objects.
+express.json()-> is the way to parse json docs send from the client.
+
+43.i.Spawn() -> Used to runs a command gives output piece by piece(streams).
+    const {spawn} = require('child_process');
+
+    let child = spawn('dir',[],{shell:true});
+
+    child.stdout.on('data',(data)=>{
+        console.log(data);
+    })
+
+    child.stderr.on('data',(err)=>{
+        console.log(err);
+    })
+
+    //or
+
+const {spawn} = require('child_process');
+
+let child = spawn('node',['-v']);
+
+child.stdout.on('data',(data)=>{
+    console.log(data.toString());
+})
+child.stderr.on('data',(err)=>{
+    console.log(data);
+})
+
+   ii.exec() -> Used to execute command using shell.
+const {exec} = require('child_process');
+
+exec('node child.js',(error,stdout,stderr)=>{
+    console.log(stdout);
+})
+   iii.execFile() -> used to execute external executable file.execFile in node.js is used to execute external executable file(file that has the instructions to the operating systems) without using shell. it is in child_process module.
+
+const {execFile} = require('child_process');
+execFile('node',['./child.js'],(error,stdout,stderr)=>{
+    console.log(stdout)
+})
+   iv.fork() -> runs node.js file.
+      const {fork} = require('child_process');
+
+      let child = fork('./child.js');
+      child.send('start');
+      child.on('message',(data)=>console.log(data));
+      child.on('error',(err)=>console.log(err));
+
+      //child.js
+      process.on('message',(data)=>{
+        console.log('Revieved data:',data);
+        process.send(data);
+      })
+
+
+44.FS module
+ File system module allow as to create,write,update ,delete files in our system.
+ ->fs.writeFile("test.txt","hello",(err)=>console.log(err));
+ ->fs.readFile("test.txt",'utf8',(err)=>console.log(err));
+ ->fs.unlink("test.txt",(err)=>console.log(err));
+
+45.REST API (Representational State Transfer API).
+ Way for communicate between client and server to communicate using http methods to perform operations on resources.
+
+46.Authentication vs Authorization
+ Authentication -> Verification of user while login with credentials.
+ Authorization -> Deciding what user is allowed to access after they authenticated.
+
+47.Cookies vs Session 
+ Both are used to store session data.
+ Cookies -> Stored in client side, automatically sent on every requst.
+ Session -> Session is created in server, give session id to client, client sent the session id in the next request.
+
+48.BodyParser
+ Body parser is used to parse the form data basically the req.body. 
+
+ let bodyParser = require("body-parser");
+ app.use(bodyParser.json());
+ app.use(bodyParser.urlEncoded(extended:true));
+
+ or i can use express.
+
+49.Content Negotiation.
+ Decides in which format the server sends the response to the client.
+
+50.ExeFile vs Exec
+ExeFile -> allow node.js to execute an executable file without using shell.
+Exec -> It uses shell to execute an external script of commands.
+
+51. Middleware Chaining
+ Executing multiple middleware functions one after another in a sequence.
+
+52.Sanitization
+ It is the process to clean or remove unwanted or harmfull data from user inputs.
+ const sanitize = ("sanitize-html");
+ let clean = sanitize(req.body.input);
+
+53.NVM (Node Version Manager)
+ User to install and use different versions of node.js in our system.
+
+54.Environment Variables
+ It is the values stored outside our code that our app can use.
+
+55.Status Codes
+ Informational:
+ a.100 -> continue-client can continue requests.
+ b.101 -> Switching protocols.
+
+ Success:
+ c.200 -> Ok- request successed.
+ d.201 -> Created.
+ e.202 -> Accepted.
+ f.204 -> No content.
+ 
+ Client Errors:
+ g.400 -> Bad request.
+ h.401 -> unauthorized.
+ i.403 -> Logged in but no permission
+ k.404 -> Not found.
+ l.405 -> Method not allowed.
+ 
+ Server Error:
+ m.500 -> Internal server error.
+ n.502 -> Bad gateway.
+
+56.app.use() vs app.set().
+app.use() -> used to register middlware, handle requests and serving static files.
+app.set() -> used to configure application level settings like view engines.
+
+57.Process vs Threads.
+ Process -> It is the full process, has its own memory. A process is a program that is currently in execution.
+ Threads -> It is small unit of process, it shares the memory.
+
+58.fs vs fs/promise.
+fs -> traditional, callback based, can lead to callback hell.
+fs/promises -> modern, uses promises/async-await, easier error handling.
+
+import fs from 'fs/promises';
+
+async function readFileExample() {
+  try {
+    const data = await fs.readFile('sample.txt', 'utf-8');
+    console.log(data);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+readFileExample();
+
+//another example//
+
+const fs = require('fs/promises');
+
+async function run(callback) {
+    await fs.writeFile('demo.js', "console.log('hello')");
+    await fs.appendFile('demo.js', "\nconsole.log('Newly appended')");
+    
+    
+    let data = await fs.readFile('demo.js', 'utf8');
+    await fs.rename('demo.js','newName.js');
+    console.log(data);
+    // callback()
+}
+async function deleteFile() {
+    await fs.unlink('demo.js')
+}
+run(deleteFile);
+
+
+
+
+59.websockets vs socket.io(chat apps,live notifications,multiplayer dashboards).
+websockets -> it is a protocol that enables real-time communication, it is built in node.js.starts as http request upgrades to websockets. connection stays open.
+socket.io -> it is a library that uses websockets to make real time communication easier. provides more features(chat groups,broadcasting,fallback supports).
+
+60.Polling Phase.
+ It is a phase where node.js checks for completed i/o operations and executes their callbacks.
+ ->The poll phase in the Node.js event loop is responsible for retrieving completed I/O operations and executing their callbacks.
+ ->It is a way to handle completed I/O operations efficiently without blocking the main thread.
+
+61.Long polling.
+ It is a technique where the client send a request to server and server does not respond immediatly, server wait until new data is available. Then server sends response. Client immediatly sends the request again.
+-->Client sends request → server
+-->Server does NOT respond immediately
+-->Server waits until:
+ ->New data is available ✅
+ ->OR timeout happens
+-->Server sends response
+-->Client immediately sends a new request again.
+
+62.Server-Sent Events.
+SSE-> It is a technique where the server continuiosly sends updates to the client over a single http connection.
+   -> It is one-way server to client only.
+
+63.Long Polling vs websockets vs Sever-Side-Events.
+long polling -> protocol is http, connection type is continious requests, client->server,not real-time,low effiency, used in legacy systems(too many http requests,not effient for scale).
+websockets -> protocol is websockets, connection type is persistant, two way client<->server, real-time , high effiency, used in chat,gaming(slightly complex to implement,needs websocket support in server).
+sse-> protocol is http, persistant,one way server->client, realtime, medium effiency, used for notifications,feeds(client cannot send data back, limited browser support).
+
+64.Environment variables, dotenv package, --env-file flag.
+ Environment variable -> Allow as to store variable outside the code.Improves security and reusability, flexibility.
+ Dotenv Package -> The dotenv package loads variables from .env file into process.env.(Reads .env files->parses key-value pairs->inject into process.env).
+ --env-file -> Node.js has now inbuilt support to load env files using node --env-file = .env app.js (create .env files and command node --env-file=.env index.js or app.js whatever).
+
+65.No cache middleware.
+ It prevents the browser from storing(caching) responses.(when user logout and press back button still sees the previous page, it happens because of browser cache).
+ -> it sets http headers like:
+  Cache-Control: no-store, no-cache, must-revalidate, private
+  Pragma: no-cache
+  Expires: 0
+  -> this tells the browser don't store this page. always fetch new data.
+  ->At its core, no-cache middleware just sets HTTP response headers that instruct the browser not to store or reuse the response.
+
+66.Salting.
+ It is a method of adding random values to a password before hashing.
+ -> if two users has same password, hackers can dectect it.
+
+67.REST API principles.
+ 1.Client-Server Architecture -> frontend and backend are seperate.
+ 2.Statelessness -> Every request is stateless.
+ 3.Resource based -> Data is treated as resources.
+ 4.Use of http methods -> (get,post,put,patch,delete).
+ 5.Uniform Interface -> consistant and predictable API designs.
+ 6.Representation -> Data is sent in a standard format(usually json).
+ 7.Layered System -> API can have multiple layers(auth,caching,proxy).
+ 8.caching -> Responses will  be cached if possible. It improves performance.
+ 
+68.Import vs Require().
+ Require(commonJS) -> Traditional, Synchronous(loads modules immediately).
+ Import(ES module) -> Modern, Asynchronous(loads modules in background), need configuration in package.json we should enable 'type':'module', top level only.
+// ❌ Not allowed inside condition, must called on top-level.
+if (condition) {
+  import lib from './lib';
+}
+
+69.__directory and absolute path vs relative path.
+__directory-> gives the absolute path of current directory.
+Absolute path -> Full path from root directory(/).
+Relative path -> Path relative to the current file.(./,../).
+
+70.CSRF (cross-site request forgery).
+ It is a attack where a malicious/harmfull website tricks a logged in users brower into sending a request to another site without users permission.
+ Preventation methods - CSRF token,check origin, use post or put.
+
+ When I visit a trusted site the browser stores the cookies when i visit a harmful website it makes a request to a trustable website without user permision with those cookies.
+
+71.XSS (cross-site scripting).
+ The attacker injects harmful js into a trustable website, that script runs on other users brower to steal data.
+ Preventation methods - helmet,sanitize user input.
+

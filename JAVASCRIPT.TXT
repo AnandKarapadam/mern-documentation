@@ -1,0 +1,503 @@
+JavaScript Topics
+1.What is JavaScript?
+2.JIT.
+3.Abstract Syntax Tree.
+4.Primitive and Non-Primitive.
+5.Types of functions:
+ a.Arrow function.
+ b.Regular Function/Function Decleration.
+ c.Function Expression.
+ d.Higher Order Functions (HOF).
+ e.First Class Functions.
+ f.Urnary Functions.
+ g.Pure Functions.
+ h.Constructor functions.
+ i.Anonymous Function.
+ j.IIFE     
+ k.Generator Function.
+ l.Callback Function.
+ m.Asyn function. 
+ n.Recursive Function.
+6.Scope
+ a.Functional Scopes.
+ b.Block Scope.
+ c.Global Scope.
+ d.Lexical Scope.
+ e.Local Scope.
+7.Coersion.
+8.Escape Sequence.
+9.Undefined vs null.
+10.Hoisting.
+11.Temporal Dead Zone.
+12.Closure.
+13.Global Execution Context.
+14.Call Stack.
+15.Event loop.
+16.Spread Operator vs Rest Operator.
+17.Promise(Promise.all().allSettled().race().any()).
+18.Shadowing vs Illegal Shadowing(Syntax Error).
+19.Deep Copy vs Shallow copy.
+20.This (call(),apply(),bind())
+21.Bracket notation vs Dot notation.
+22.Prototypes inheritance and chaining.
+23.Currying
+24.Pass by value && Pass by reference.
+25.BOM 
+26.Object.freeze() vs Object.deepFreeze().
+27.Debouncing.
+28.Throttling.
+29.Proxy.
+30.Event Delegation.
+31.Event Propogation.
+32.Polyfills(like map(),filter(),forEach())
+33.WeakMap() and WeakSet().
+34.Prevent Default.
+35.Template Literals.
+36.Nullish Colescing ??.
+37.Stop Propogation.
+38.Object.seal()
+39.Use Strict.
+40.Promises vs Observables.
+41.AJAX
+42.eval().
+43.Starvation.
+44.Function Composition.
+45.Null Pointer Exception.
+46.Factory Function.
+47.Async vs Differ.
+48.Default Parameters.
+49.Short-Circuit-Evaluation.
+50.Garbage Collector.
+51.Memory Leakage.
+52.Private Constructor.
+53.localStorage vs sessionStorage
+54.Session.
+55.session vs jwt.
+56.httpOnly.
+57.Jagged Array.
+58.Ways to create deep copy.
+59.Proxy Object.
+60.Lamda Function.
+61.Array.from().
+62.Symbol.
+
+
+1.JavaScript(build by v8 engine)(js parses->convert into bytecode->JIT->execute)
+It is a interpreted language scripting language used to create webapplications interactive and dynamic. JS interpreted it dosen't need external compilation, js uses Just-In-Time compilation for execution.
+
+2.JIT (Just-In-Time)
+Technique where the js code is converted to machine code at runtime instead of before execution.js is converted into AST -> AST converted into bytecode->JIT convert in to machine code-> execution.
+
+3.AST
+Tree structure that represents syntax of our code in a structured and hierrarchial way.
+ JavaScript Execution Flow 🚀
+
+1. AST (Abstract Syntax Tree)
+   - Represents JavaScript code in a structured, hierarchical tree format
+
+2. Bytecode Generation
+   - JavaScript engine converts the AST into bytecode
+
+3. Interpreter
+   - Executes the bytecode immediately (fast startup)
+
+4. JIT (Just-In-Time Compiler)
+   - Detects frequently executed (“hot”) code
+   - Compiles it into optimized machine code
+   - Improves performance significantly ⚡
+
+-> Inline Caching - That remember the value and directly jumps without lookup.
+
+4.Primitive and Non-Primitive
+Primitive - Primitive is predefined datatypes provided by languages.(number,string,null,undefined,sympols).
+Non-Primitive - It is programmer defined it is referenced, it uses heap memory(array,objects,functions,class).
+
+5.Types Of Function:
+Function - It is a block of code that can be reused everywhere intead of rewriting.
+
+a.Arrow Function
+ It is a function introduced in ES6, it is the simpler form of function. It automatically returns if i didn't use {}. Arrow functions does not have their on this context.
+let hello = ()=>'hello'
+
+b.Function Decleration
+ It is normal/regular functions advantage is it fully hoisted.We can invoke the function before decleration.
+function hello(){}
+
+c.Function Expression.
+ It a function that is assigned to a variable.It hoist based up on which keyword is used.
+ let hello = ()=>'hello';
+
+d.Higher Order Function(HOF)
+ A function that has a function as argument or return a function.
+
+e.First Class Function.
+ A function is passed as an argument, or returned from a function.
+
+f.Unary function.
+ A function that takes one argument.
+
+g.Pure Functions.
+ A function that always give same output for same input.
+
+h.Constructor Function.
+ Used to create objects. It give structure of objects and imporve reusability.
+ function Person(name,age){
+    this.name = name;
+    this.age = age
+ }
+ let p = new Person("Anand",25);
+
+i.Anonymous function
+ A function that has no name.
+ setTimeOut(function(){},1000);
+
+j.IIFE (Immediatly Invoked Function Expression)
+ Function that automatically invokes itself, I doesn't need manual invocation. Used to encapsulate values.
+(function greet(){console.log('hello')})();
+
+k.Generator Functions
+ Function that can return multiple values. It can pause and resume(using next()) the execution of function.
+ function *generator(){yield 4;yield 7}
+
+l.Callback Functions
+Functions that passed as a argument. So it can be invoked later or after a specific execution.
+
+m.Async Functions.
+Always returns a Promise, it is used to write asynchronous code.(API fetching)
+
+n.Recursive Function.
+A function that calls itself to solve a specific problem by dividing the problem into smaller pieces.
+
+6.Scopes.
+Scope - it determines the visibility of data. Determines where a function or variables can be accessed.
+a.Functional Scope - Variables can be only accessed inside the function.(var).
+b.Block Scope - Variables can be only accessed inside blocks{}.(let,const).
+c.Global Scope - Variables can be accessed every where in the file.
+d.Lexical Scope(scope where the function is defined) - A function that can access the variables that defined in the place where the function was written, not where it is called.
+e.Local Scope - Scope inside function.(variables are decleared inside the function are only accissible within the function).
+
+7.Coersion
+ It is default behaviour of js that automatically convert the type of data.
+ i.Implicit Coersion - JS automatically converts the types ("6"+6= '66' it is treated as string).
+ ii.Explict Coersion - Developers manulay converts the types (Number() or num.toString())
+
+8.Escape Sequence
+ It let us to write impossible texts like new line, often denoted by forward slash (/n).
+
+9.Undefined VS Null 
+Undefined-> When I try to access a data that is decleared but not initialised.
+Null-> To represent intentional absence of value.
+
+10.Hoisting
+ Hoisting is a default behaviour of js, declerations are moved to the top of their scope during creation phase.
+
+11.Temporal Dead Zone(TDZ)
+ It is a zone where let and const variables are hoisted and not initialised. So when we try to access it will throw reference error.
+
+12.Closure
+ Behaviour of js a function that always remember the values in the lexical scopes.Used for encapsule data that restrict direct access to the data.
+
+13.Global Execution Context (GEC).
+ It is a environment where the js code is executed.It has two phases:
+ i.Memory Allocation Phase->Phase where scans js code and allocate memory before execution.
+ ii.Execution Phase->Phase where the all the code is executed line by line.
+
+14.Call Stack
+ Manintains the order of execution. Has a specific ordering LILO.
+
+15.Event Loop 
+ Event loop is a mechanism that continuiosly check the call stack and handles asynchronous tasks.
+ WEB APIs-> JS alone cannot handle timer functions, fetchs, events it is provied by runtime environments(Brower apis), to when it encounter it is passed to WEB APIs to handle it asynchronously else js will block the main thread. After hanling it is passed to the callback queue.
+ Callback queue(macrotask queue) ->contain all the asynchronous task execpt Promises.
+ MicroTask queue -> contain the Promise and it has higher priority. Waits for completion of synchronous tasks then pushed to call stack immediatly before call back queue.
+
+16.Spread Operator vs Rest Operator
+Spread operator -> it is used to expand/unpack the array, or objects.
+Rest Operator -> it is used to collect infinit number of values.Used to collect infinite arguments, object destructuring,array destructuring.
+
+17.Promises
+ It is used to represent eventual completion or failure of an asynchronous operation.
+ let promise = new Promise((res,rej)=>res).then().catch();
+
+i.Promise.all()-> used to run multiple promise in parallel and wait until all of them are resolved.
+ii.Promise.allSettled()->used to run multiple promise in parallel and wait until all of the promises are settled.
+iii.Promise.race()->used to run multiple promise in parallel and return first settled promise.
+iv.Promise.any([p1,p2,p3])->used to run multiple promise in parallel and return first fulfilled promise.
+
+18.Shadowing vs Illegal Shadowing.
+Shadowing -> variable decleared inside a scope that hides the value from its outer scopes.
+Illegal Shadowing(syntax error) -> Same named variable decleared in different scope that make confilt and error.(let a {var a}).
+
+19.Deep Copy vs Shallow Copy
+ Deep Copy-> Creates actual copy of a object (JSON.Parse(JSON.stringify(obj))).
+ Shallow Copy-> Copies top level properties and nested objects are still referenced.
+
+20.This
+ Is used to refer a object.
+ call()-> Is used to explicitly set the value of this to a function. Arguments are comma seperated greet.call(obj,arguments,,);
+ apply()-> Is used to explicitly set the value of this to a function. Arguments are passed in an array. greet.apply(obj,[arguments,,]);
+ bind()-> Is used to explicitly set the value of this to a function. It does not invoke the function immediatly.
+
+21.Bracket Notation vs Dot Notation
+ Bracket Notation-> used when property name is dynamic or string. 
+ Dot Notataion-> used when property name/key is fixed or known.
+
+22.Prototypes 
+ Prototypes is objects that other objects inherit properties and methods from. Every object has hidden property called [[prototype]].
+ Prototypal inheritance -> inherit properties from another objects.
+ Prototypal Chaining -> Objects inherit properties and methods from chains of prototypes.
+  eg:const grandParent = {
+  greet() {
+    console.log("Hello from grandparent");
+   }
+  };
+const parent = Object.create(grandParent);
+const child = Object.create(parent);
+child.greet();
+
+23.Currying
+ Functions with multiple arugments are passed to a sequence of functions to improve controll over data and reusability and partial application.
+ Currying for infinite sum:
+ 
+ function sum(a){
+    return function (b){
+        if(b===undefined)return a;
+        return sum(a+b);
+    }
+}
+console.log(sum(10)(20)())
+console.log(sum(10)(20)(100)(500)())
+
+ or
+
+function sum(...args){
+    let total = args.reduce((acc,val)=>acc+val,0);
+    
+   return function inner(...nextArgs){
+        if(nextArgs.length===0){
+            return total
+        };
+        
+        total+=nextArgs.reduce((acc,val)=>acc+val,0);
+        return inner;
+    }
+}
+console.log(sum(10,10)(10)(10,10)());
+
+24.Pass by value vs Pass by reference
+Pass by value-> when we pass primitives a copy is passed.
+Pass vy reference-> occures when we pass Non-primitives , reference is passed.
+
+25.BOM Brower Object Model
+Allow as to interact with brower specific objects like alert(), propmt(), setTimeOut(),setInterval(),window.
+
+26.Object.freeze vs Object.deepFreeze()
+Object.freeze()-> Makes immutable objects that prevent adding,updating top level, deleting.
+Object.deepFreeze()-> Makes immutable objects that prevent adding,updating,deleting.
+
+27.Debouncing
+ Technique used to delay a function execution, used in searching like the request will dispatch when user stop typing.
+
+28.Throttling
+ Technique used to limit a function execution is a specific time interval , used while scrolling.
+
+29.Proxy
+Proxy is an object that stands in front of another object or wraps the objects and controls how we read or change its values.
+
+let proxy = new Proxy(target,handlers);
+
+30.Event Delegation
+ Event delegation is efficient way to write a event. Instead of repeating same event for multiple element I can give it to the parent and target to the elements.
+
+31.Event Propogation
+ Flow of event in DOM tree. By default it is Bubbling phase it travel from inner element to the outer elements.
+ Two phases:
+ 1.Bubbling Phase: Event travel from inner element to outer elements(doc<-html<-body<-div<-target).
+ 2.Capturing Phase: Event travel from outer elements in DOM tree to inner element. (doc->html->body->div->target).addeventListerner(()=>{},true)
+
+ to stop propogation we have e.stopPropogation();
+
+32.Polyfills
+ It is a way to implement modern brower features in older browers.
+
+Array.prototype.myFilter = function (callback){
+    let result = [];
+    for(let i=0;i<this.length;i++){
+        if(callback(this[i])){
+            result.push(this[i]);
+        }
+    }
+    return result;
+}
+
+console.log([3,1,2,3,4].myFilter((x)=>x!=3))//[1,2,4]
+
+33.WeakMap(to store metadata of objects) vs WeakSet
+weakMap -> is a collection of key-value pairs every key must be objects and those keys are weakly referenced so it can be garbage collected.
+ let obj = {name:"AnandKV"}
+ const wm = new WeakMap();
+ wm.set(obj,"some data");
+ console.log(wm.get(obj));
+
+ eg: 
+const map = new Map();//strongly referenced so we use weakmap. In this key can be anytype.
+map.set("name", "Anand");
+map.set(1, "number key");
+map.set(true, "boolean key");
+
+console.log(map.get("name")); // Anand
+
+WeakSet->is a collection of objects prevent duplicates and it is weakly referenced.ws.add(obj) ws.has(obj);
+
+34.Prevent Default(e.preventDefault)
+It is used to prevent browers default behaviours like refreashing the page after form submission.
+
+35.Template Literals
+ Introduced in ES6 it allow as to write variables inside string it is implemented by backtick.
+
+36.Nullish Colescing.
+ It returns right hand value if the left hand value is null or undefined. let value = name??newName.
+
+37.Stop Propogation
+ It is used to stop the propogation of events.By default it is bubbling phase to stop we use stopPropogation().
+
+38.Object.seal()
+ It protect a object from adding and deleting properties of object but it allows updation of properties.
+
+39.use Strict "use strict" (enables strict mode)
+ It makes js a safer way.Prevent undeclared variables.No duplicate parameters.Prevent deleting variable.
+
+40.Promise vs Observables (it is in angular)
+
+41.AJAX (Asynchronous JavaScript XML).
+ It allow as to make api calls without refreashing the page.
+
+42.eval()
+ Used to evaluate string. "3+5" = 7, eval("console.log("hello")")
+
+43.Starvation
+ When a task is waiting and never get a chance to execute. Because of some task is running for long time.
+
+44.Function Composition
+ It combines many functions to create a new function.
+
+45.Null Pointer Exception
+ When I try to access a value that is null.(type error).
+ let User = null;
+ console.log(User.name);
+ 
+46.Factory Function 
+ It is a function that returns a object.
+
+47.Async vs Differ
+Both are used to load JavaScript efficiently.
+Async-> that load js parallely with html.executes immediatly after download.
+Differ->load js parallely with html. executes after html fully parsed.
+
+48.Default Parameters
+ ES6 feature to create a fallback for parameters.
+
+49.Short-Circuit-Evaluation
+ Whenever JS determines a value it stop execution it don't go for next.
+ &&-> determines first falsey value or last value. false&&true => false.
+ ||-> determines first truthy value.true||false=>true.
+
+50.Garbage Collector
+ Manages heap memory by removing or freeing up the memory by removing the data that is no longer reachable or needed in program.
+
+51.Memory Leakage
+ It happens when memory is not released even if the data is no longer needed or reachable. So garbage collector cannot collect and free up the space.
+
+52.Private Constructor
+ A constructor that cannot be called outside the class, it can be called inside the class itself.
+
+53.LocalStorage() vs SessionStorage()
+LocalStorage()->Stores data permentently until I manualy delete it, data persist even page refreash, browser close, shared across tabs.
+sessionStorage()->Store data only for one tab, data is cleared on tab close, not shared between tabs.
+
+54.Session.
+ Session is the way to remember user after login.
+ ->user login with credentials->validate user
+ ->if valid create session
+ ->server stores session data({id:"abc123",userId:'user_1'})
+ ->server sends session Id as cookie(brower automatically stores this cookie).
+ ->client sends requests the id automatically sends.
+
+55.Session vs JWT.
+ session -> stored in server, stateful(server remembers the user),slighly slower,easy logout.
+ JWT -> stored in client, stateless, faster,harder for logout.
+
+56.httpOnly
+ It is a safer method to store cookies because it prevents js from accessing them.
+
+57.Jagged Array.
+ It is a array the elements are another array of different sizes.
+ array of arrays with different sizes.
+ let arr = [[1,2],[3,4,5],[7,6,1,2]];
+
+58.Ways to create deep copy:
+ 1.JSON
+   JSON.parse(JSON.stringify(obj));
+ 2.structuredClone(obj);
+  let copy = structuredClone(obj);
+  handles:objects,array,date,map,set.
+ 3.Manual Recursion
+  function deepCopy(obj){
+    if(obj!==null||typeof obj!=='object')return obj;
+
+    let copy = Array.isArray(obj)?[]:{};
+
+    for(let key in obj){
+      copy[key] = deepCopy(obj[key]);
+    }
+    return copy;
+  }
+ 
+ 59.Proxy Object
+  It is a wrapper for object that controll operations on the object(like a middleman).
+  Common Handlers -> get,set,has(in),deleteProperty   
+
+  const user = {
+   name:'Anand'
+  }
+
+  const proxy = new Proxy(user,{
+   get(target,prop){
+      console.log(`Accessing ${prop}`);
+      return target[prop]
+   }
+  })
+
+  console.log(proxy.name);//Accessing name \n Anand 
+
+59.Lamda Function(=>).
+ It is just a short,anonymous function 
+ const square = x => x * x;
+
+60.Array.from().
+ Converts array-like or iterable objects into a real array.
+ syntax - Array.from(iterable,mapFn);
+
+ let arr = Array.from('hello) // ['h','e','l','l','o']
+
+ i.convert array like object:
+ const obj = {0: 'a', 1: 'b', length: 2};//length is not iterable
+
+ Array.from(obj);// ['a', 'b'];
+
+ ii.With mapping 
+  Array.from([1, 2, 3], x => x * 2);// [2, 4, 6]
+
+ iii.Create a array
+  Array.from({ length: 5 }, (_, i) => i);// [0, 1, 2, 3, 4].
+
+61.Symbol().
+ A primitive datatype used to create unique identifiers.
+
+const id1 = Symbol('id');
+const id2 = Symbol('id');
+
+console.log(id1 === id2); // false
+
+
+

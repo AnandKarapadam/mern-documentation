@@ -1,0 +1,210 @@
+DSA topics.
+1.Asymptotic notations.
+2.Stack underflow , Stack Overflow.
+3.Applications of HashTable(chaching,sets,dictonaries).
+4.Error first callback.
+5.Linear Datastructurs.
+6.LinkedList.
+7.Stack
+8.Queue.
+9.Non-linear Datastructures.
+10.Binary Tree.
+11.Binary Search Tree.
+12.Heap Tree.
+13.Trie.
+14.Graph.
+15.Minimum Spanning Tree.
+16.Tail Recursion.
+17.Tail Call Optimization.
+18.Suitable sorting for LinkedList.
+19.Load Factor.
+20.why cryptographic hash functions are not a good fit for hash tables.
+21.Online/LiveSorting.
+22.Adjacency List vs Matrix vs Edge List.
+23.Array to represent heaps.
+24.Pruning.
+25.Greedy Algorithm.
+
+1.Asymptotic notations.
+ It is a mathematical tool used to describe the time and space complexity of an algorithms as input size grows.
+ i.Big O notation(worst case) -> Maximum time an algorithm can take.
+ ii.Omega notation(best case) -> Minimun time an algorithm can take.
+ iii.Theta notation(avg case) -> Theta notation represents the exact growth rate of an algorithm.
+
+2.Stack underflow , Stack Overflow.
+Stack underflow -> Stack underflow occurs when you try to remove (pop) an element from an empty stack.
+Stack Overflow(too many function calls) -> Stack overflow in JavaScript occurs when the call stack exceeds its limit, usually due to excessive or infinite recursion, resulting in a ‘Maximum call stack size exceeded’ error.
+->wrong base case in recursion can trigger infinite function calls.
+
+3.Applications of Hashtable.
+ i.database indexing.
+ ii.dictonaries.
+ iii.Fast lookup (searching) -> check if an element exists.
+
+4.Error First Callback.
+ It is a function its first argument will be error.
+
+ let fs = require("fs");
+ fs.readFile('text.txt','utf-8',(err,data)=>
+    if(err){
+        console.log("Error:",err);
+        return;
+    }
+    console.log("Data:",data);
+ )
+
+5.Linear Datastructures.
+ Linear datastructures that store data in a sequence one after another.Arrays,linked-list,stack,queue.
+
+6.LinkedList.
+ LinkedList is a linear data structure, where elements are stored as nodes, each node points to the next node.
+    i.Singly linked list - Each node points to the next nodes.Undo functionality,adjacencyList in graph.
+    ii.Doubly linked list - Each node points to previous nodes and next nodes.Browser navigation,music playlist.
+    iii.Circular Linked list - Last node points to the first node.Buffer implementation(like streaming video/audio).
+
+7.Stack
+ Stack is a linear datastructure, stores data in LIFO order.(push,pop,top).
+ ->call stack, undo-redo operations, browser back and forward navigation.
+
+8.Queue
+ Queue is a linear datastructure, stores data in FIFO.(enqueue,dequeue).
+ ->CPU scheduling,BFS.
+
+9.Non-Linear Datastructres.
+ Stores data in a hierrarchy , network like manner.
+ ->Tree->non-linear datastructure that stores data in nodes connected by edges.
+ ->Graph->non-linear datastructure that stores data in vertices it is connected by edges.
+
+10.Binary Tree(file systems,searching and sorting).
+ It is a tree datastructure that it can have atmost two child nodes.
+ i.Full binary tree -> every node in the tree can have 2 children or 0 child nodes. It could not have 1 child node.
+ ii.Complete Binary tree(heap tree) -> every node is filled except the last level and it is filled from left to right.
+ iii.Perfect Binary tree -> every node is filled and all leaf nodes are in last level.
+ iv.Balanced Tree(red-black tree) -> the height difference between left and right subtree is lessthan or equal to 1.
+
+11.Binary Search Tree(BST)(range queries,searching - o(log n),sorting,set, map).
+  It is binary tree has a order like left child node should be lessthan parrent and right child node should be greaterthan parent node.
+
+12.Heap Tree(O(n log n))(priority queue,heap sort).
+ It is a compelete binary tree. It is used for priority based tasks.
+ Max-Heap: parent ≥ children
+ Min-Heap: parent ≤ children
+ Heaps are primarily used to efficiently find the maximum or minimum element.
+ ->insertion-O(log n).
+ ->deletion-O(log n).
+ ->heapify-O(log n)
+
+13.Trie(O(L)).
+ Trie is used to store and search string efficiently.
+ ->Dictonaries.
+ ->Prefix based searches.
+ 
+14.Graph(social networks,internet-networking).
+ Graph can be represented in two ways: 
+ -> adjacencylist {A->B,C} ,it is object/list, faster iteration.(O(v+e)) for traversal v-vertices, e-edges.
+ -> adjacencymatrix[[0,0],[1,0]],it is 2d array, slower iteration (uses a lot of unnecessary space).
+ i.Directed graph -> it is a graph where edges have direction.
+ ii.Undirected graph -> it is a graph where edges have no direction.
+ iii.Weighted -> it is a graph where each edges has a value(weight).
+ iv.Unweighted -> it is a graph where each edges has no weight.
+ v.connected -> Every nodes are reachable from every nodes.(i can reach any nodes from any nodes).
+ vi.disconnected ->Graph not all nodes are reachable.
+ vii.Cyclic ->A graph contain atleast one cycle.(start a node follow edges comeback on same node).
+ viii.Acyclic->A graph doesnot contain any cycle.
+
+15.Minimum Spanning Tree.
+ Connects all nodes using minimal cost(weight), no cycles.
+ A --1-- B          
+ |       |
+ 4       2  
+ |       |
+ C --3-- D
+
+ possible mst:
+ 
+ A --1-- B
+       |
+       2
+       |
+       D
+       |
+       3
+       |
+       C
+because 1+2+3 = 5 it is minimum.
+
+16.Tail Recursion.
+ A recursive function that last operation is the recursive call(no work after it).
+ eg:function sum(n, acc = 0) {
+     if (n === 0) return acc;
+     return sum(n - 1, acc + n); // last operation = recursive call
+    }
+
+17.TCO (Tail Call Optimization).
+  TCO is when js does not create a new stack frame for recursive call, it reuses the current one.
+  No stack growth.
+  Prevents stack overflow.
+  Memory efficient.
+
+18.Most suitable sorting algorithm for Linked List.
+  Merge Sort->Efficient Time Complexity(O(n log n)), it is stable (keeps the relative order).
+
+19.Load Factor.
+ Load factor tells how full the hash table is.
+  
+  Load Factor (α)=Number of buckets/Number of elements
+
+  Ideal Threshold -> Chaining->0.7 - 0.75
+                     Addressing-> 0.5 - 0.7
+
+ Rehashing(reduce collisions)-> It is a process of increasing the size of the hash table and redistributing all elements.
+
+20.why cryptographic hash functions are not a good fit for hash tables.
+ i.Too slow.
+ ii.Large output size.
+ iii.Cache inefficiency->More CPU work.
+
+21.Online/live Sorting.
+ It can process and maintain sorted order as data arrives continously, instead of waiting for all input infront.
+ eg: insertion sort, heap sort.
+
+22.Adjacency Matrix vs Adjacency List vs Edge List.
+ Adjacency Matrix -> Represent elements in 2d array. Fast edge lookup O(1), High memory useage(v^2), slower iteration.
+ Adjacency List -> Represent elements in list. Memory efficient O(V+E), fast iteration, slower edge lookup O(degree).
+ Edge List -> Simplest representation, memory efficient O(E), slow edge lookup
+ 
+23.Why do we use arrays to represent heaps?
+
+1. Complete Binary Tree Property
+   - Heaps are complete binary trees (filled level by level)
+   - This structure fits perfectly into an array without gaps
+
+2. No Need for Pointers (Space Efficient)
+   - Unlike trees, arrays don’t store left/right pointers
+   - Saves extra memory → more space efficient
+
+3. Index-based Relationships (Simple Math)
+   - Parent index = (i - 1) / 2
+   - Left child = 2i + 1
+   - Right child = 2i + 2
+   - Makes navigation very fast and simple
+
+4. Cache Locality (Better Performance)
+   - Arrays store elements in contiguous memory
+   - CPU cache works efficiently  → faster access compared to pointer-based trees
+
+5. Faster Operations
+   - Insert and delete operations are efficient (O(log n))
+   - No pointer traversal overhead
+
+Conclusion:
+Arrays are used for heaps because they are space-efficient, cache-friendly, and allow fast computation using index formulas.
+
+24.Pruning.
+ Removing unwanted or less useful parts to improve performance or results.
+
+25.Greedy Algorithm.
+ Makes the best possible choice at each step, hoping it leads to the overall best solution.
+
+26.Dynamic Programming.
+ It is a way to solve a problem faster by saving the result and reusing it.

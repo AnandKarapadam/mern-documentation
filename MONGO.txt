@@ -1,0 +1,377 @@
+MongoDB
+1.What is mongoDB?
+2.Non-Relational database.
+3.ACID properties.
+4.BASE properties.
+5.CAP
+6.Normalization
+7.Denormalization
+8.Capped Collection
+9.Query Routing
+10.Covered query.
+11.unwind.
+12.lookup.
+13.Bucket
+13.journaling
+14.grid fs
+15.mongodump vs mongostore
+16.Bulkwrite
+17.replica set
+18.sharding
+19.out
+20.in vs all
+21.Clustered collection
+22.Partial indexing, compound indexing.
+23.push vs addtoset.
+24.materilized views.
+25.write concerns, read concerns.
+26.batch sizing
+27.db profiling
+28.cursor
+29.fill
+30.namespace
+31.locks
+32.setUnion
+33.expr
+34.oplogs
+35.isolation
+36.components of _id
+37.Data modeling and anti-patterns
+38.ORM and ODM
+39.GeoSpatial indexing
+40.ttl
+41.vertical scaling
+42.horizontal scaling.
+43.expr
+44.count vs size.
+45.distinct(db.collection.distinct(<field>,<query>)).
+46.indexing and its types(sparse indexing, geospatial indexing, ttl index, clustered index).
+47.Regex
+48.views
+49.pop(first or last element) vs pull(condition based);
+50.Allowdiscuse
+51.Cluster.
+52.BottleNecks.
+53.ORM vs ODMs
+54.Working set.
+55.bulkWrite.
+56.facet.
+57.SQL/NoSQL injection.
+58.Balancer.
+59.COLLSCAN vs IXSCAN.
+60.Explain().
+61.$regex vs $text
+
+1.What is MongoDB?
+ MongoDB is a NoSQL, non-relational database that stores data in JSON-like documents, key-value pairs, or graphs,wide column. It is highly efficient for handling large datasets and does not require a fixed schema.
+-> NoSQL - is a type of database that stores data in a flexible, non-relational format.
+
+2.Non-relational 
+ Data is not arranged in columns or rows that is non-relational databases
+
+3.ACID
+ Gurantees and ensure the data stored is consistant(accurate,correct and reliable) and realiable.
+ Atomicity:Whenever one operation in transaction fails entire transaction rollback.
+ Constistancy:Ensures data is accurate, correct and reliable.
+ Isolated:Multiple transaction do not interupt each other.
+ Durability:When a transaction is commited the data is stored permentently even if the server crashes.
+ 
+4.BASE
+ Focus on avalabilty and scalability of data over strict Constistancy.
+ Basicaly available: System always give response even if the sever is slow or the data is upadating.
+ Soft State: Data in multiple server/nodes can change overtime (replica set).
+ Eventuly consistant: Data is eventualy consistant , it update the data not immediatly(replica set).
+
+5.CAP
+ In a distributed system, CAP theorem states that it is impossible for a system to have simultaneously provide  Constistancy(C),Availability(A) and Partition Tolerance(P).A system can gurantee at most two. 
+ C.Constistancy-> The data will be accurate and reliable.(latest data).
+ A.Availability -> The data is available for every request even if the system crashes.
+ P.Partition Tolerance -> The system continues to work even if communication between nodes fails.
+
+6.Normalization
+ It is the method of reduce the redundancy(removing the duplicate) by moving the related data into different documents in different collections.
+
+7.Denormalization
+ It is the method of storing related data in the same document, it is called embedding.
+
+8.Query Routing
+ It directs the query request to the correct shards, mongos uses shard key point the request into correct shard.
+
+9.Capped collection
+ Collection with a specific size limit it is known as capped collection(FIFO).eg:last logged users.
+ db.createCollection('teachers',{capped:true,size:10000000,max:1000})//size:10mb,maximum docs:1000
+
+10.Covered Query
+ Query that does not hit the actual collection, it will work when all the fields are indexed.
+
+11.$unwind
+ Help us to unwind/destructure an array field into documents each document has each elements of the array.
+
+12.$lookup
+ Let us to join two documents from different collections.
+
+13.Bucket
+ Bucket groups related data into one document to make query faster and more efficient.
+
+14.Journaling
+ It is a feature in mongodb that records all the write operations before applying to the data. If crash occures , it helps to replay the query.
+
+15.Grid FS
+ GridFS is feature in MongoDB used to store and retrive data that size is more than 16mb by spliting data into smaller chunks storing them in database.
+-> Internally it uses two collections 
+ fs.files->metadata, 
+ fs.chunks -> stores actual files in pieces.
+
+16.MongoDump
+ It is used to create a backup for collections or the entire database. It stores in BSON format.
+   MongoStore 
+ It is used to restore data from a backup created by mongodump. It can restore full database or specific collections.
+
+17.Bulkwrite
+ It is a feature used to write multiple write operations in one single query.(db.users.bulkwrite([]))
+
+18.Replica Set
+ It is a group of servers/nodes that have the duplicate or the actual dataset whenever the primary server fails it uses secondary server. So it don't crash the db.
+
+19.Sharding 
+ Sharding is a feature of mongodb that divide the large dataset to small chunks and store in different shards/servers. When we request for any data the mongos points to the actual shards by using shard key.
+
+20.$out({$out:"totalSales"})
+ It writes the result of aggregate pipeline and store it in a new collection or replacing old collection.
+
+21. $in vs $all
+ $in - $in operator in MongoDB is used to match documents where a field’s value equals any value in a given array.”.(db.products.find({color:{$in:["red","white"]}}))- this will return the docs with color 'red' or 'white'.
+ $all - it is used to check all the values that exist in the array field.(db.prdoucts.find({color:{$all:["red"]}}))- only matches the docs with exactly 'red' color.
+
+22.Clustered Collection(db.createCollection('orders',{clusteredIndex:{key:{orderId:1},unique:true}}))
+ It is a collection that stores docs in a specific order based up on a field , it can be stored in asending order or descending order.
+
+23.Indexing (db.collection.createInde({name:1},{sparse:true})) - if i use sparse it only index docs contain that field.Without sparse the doc will also index and store the field as null.
+ Indexing is a way to imporve the query speed by creating index for specific fields of docs. It stord in a B+tree so the data retrival become very fast(find(),sort()) become fast.Slow for write queries.
+ i.Compound Indexing - indexing multiple fields
+ ii.MultiKey Indexing - indexing array fields.
+ iii.GeoSpatial Indexing - indexing location-based data.
+ iv.Partial Indexing - field that specifies some conditions.
+
+24.$push vs $addtoset
+ i. insert a value to array field - db.updateOne({name:"Anand"},{$push:{hobbies:"eating"}})
+ ii. insert a value to array field do not allow duplicates - db.updateOne({name:"Anand"},{$addtoset:{hobbies:"eating"}}) 
+
+25.Materilized View 
+ It is a view that can store a precomputed data. It is implemented by using $out.
+
+26.View
+ It is used to store read query instead of rewriting it everytime.(db.createView("viewName","collection",[aggreagate pipeline])).   
+
+27.Write and Read concerns
+i.write concerns-Ensures writes are durable and replicated.Ensure that when i write data, it is safely saved optionaly updated.() 
+db.rooms.insertOne(
+  { roomNumber: 106, type: 'Premium', rate: 8000 },
+  { writeConcern: { w: "majority" } }
+);
+ii.read concerns-Ensures reads are consistant and isolated.Ensures Constistancy and no partial written.
+db.rooms.find(
+  { isAvailable:true },
+  { readConcern: { level: "local" } }
+);
+
+28.Batch Sizing(db.users.find().batchSize(5))
+ ->It controls how many documents are returned per batch from the server(when i search a query it give result in batches(saves memory)).
+ MongoDB returns query results in batches, not all at once.
+ Number of documents should returns at a time when i run a query.Help to reduce memory usage.Cursor only fetches the defined size.
+
+29.DB Profiling
+ Used to record and monitor the database operations.Helps to see the slow queries.
+
+30.Cursor
+ It act as a pointer that loops through the fetched data.
+ A cursor lets you iterate through query results one document at a time, instead of loading all documents into memory at once.
+
+31.$fill (db.users.aggregate([{$fill:{output:{fildname:{method}}}}])) - > method can be like value:0 
+ Fill allow as to fill the gaps or missing sequence.It is an aggregate pipeline. We need to sort it first.
+ { day: 1, revenue: 100 }
+ { day: 2, revenue: null }
+ { day: 3, revenue: 150 }
+
+db.sales.aggregate([
+  {
+    $fill: {
+      output: {
+        revenue: { value: 0 }
+      }
+    }
+  }
+])
+
+32.NameSpace 
+It is the full path to a collection.<db>.<collection>
+
+33.locks
+Locks-> control how multiple users access the same data at the same time
+      If one user is updating a document
+      Another user tries to update the same document
+
+👉 MongoDB uses a lock to:
+    Allow one operation
+    Make the other wait 
+
+34.$setUnion ({$project:{allHobies:{$setUnion:[['reading','music'],['music','travel']]}}}) -> allHobies:['reading','music','travel']
+it combines two or more array and remove duplicates, returns a single array.
+
+35.$expr (db.users.find({$expr:{$eq:['$total',"$sum"]}}))
+Allow us to use aggregate expression in queries.
+
+36.Oplogs (it is capped old entries are removed)
+It is a special collection in replica set that records all the changes(writes). Primary node/server that store the write operations in oplogs, secondary reads the oplogs and apply it.
+
+37.Isolation 
+Mongodb allows multiple operations at same time without interupting each other.
+
+38.Components of _id
+ i.timestamp(4)
+ ii.random value
+ iii.counter
+
+39.Data Modeling and Anti-Patterns 
+Data modeling - process of structuring the data. Embedding, referencing(normalizing).
+Anti-Patterns - common mistakes while modeling , uses one single collection for all data, exessive embedding, excessive references.
+
+40.ORM(Object Relational Mapping) vs ODM(Object Document Mapping)
+ORM- used in sql databases , maps tables into objects.(table->object)
+ODM - used in no-sql , maps the documents into objects.(collection->object)
+
+41.TTL (db.users.createIndex({createdAt:1},{expireAfterSeconds:3600}))
+Automaticaly deletes documents after a certains amount of time. Documents should have a date field.
+
+42.Vertical Scaling
+Add more RAM,CPU,Disc space.Default mongodb is verticaly scaled.
+
+43.Horizontal Saling
+Add more servers for large dataset. No-sql it will work easily. In SQL it is bit complex.
+
+44.Count vs Size 
+count - used to count documents.
+$size - aggregation/query operator to find the length of array fields within the document.
+db.users.aggregate([
+  {
+    $match: {
+      $expr: { $gt: [ { $size: "$skills" }, 2 ] }
+    }
+  }
+]);
+
+45.Distinct (db.users.distinct("age",{name:"Anand"}))
+Returns array of unique field values.
+
+46.Regex (Regular Expression)
+Regex is used for text searches.
+starts with - {name:{$regex:/^A/i}}
+ends with - {name:{$regex:/s$/i}}
+
+46.$pop vs $pull
+Both are used with array fields.
+$pop - Remove first or last elements of an array.(db.users.update({name:'anand'},{$pop:{hobbies:1}}))->1 removes from last -> -1 removes from first.
+$pull - To remove a specific elements based up on conditions in a array field.(db.users.update({name:'anand'},{$pull:{hobbies:'dancing'}}))
+
+47.Allowdiscuse
+A option in aggreagation pipeline {allowDiskUse:true}. Mongodb keeps aggregation in Memory when it exceeds 100mp it will crash. Solution is allow disk use it tells mongo to use temopory disk space.
+
+48.Cluster.
+ A MongoDB cluster is a group of database servers working together, typically implemented as replica sets for high availability or sharded clusters for scalability.
+ 1.Replica set(avalabilty) -> same data is copied in different servers. If one fails secondary server works.
+ 2.Sharding(scalability) -> Large dataset is distributed into different servers shards, the router(mongos) direct the queries to the actual servers.
+
+49.BottleNecks.
+A bottleneck is anything that slows down your database performance.
+->Misseing indexes.
+->Too many indexing.
+->Large Documents.
+
+50.ORMs vs ODMs.
+ Object Relational Mapping -> ORM is a technique that allow as to interact with relational databases(SQL) using objects in our programming languages, by mapping objects to database tables.
+ Object Document Mapping -> ODM is a technique that allow as to interact with non relational databases(NoSQL) using objects in our programming languages, by mapping objects to JSON-like documents.
+
+ ORM -> used with relational databases(sql), data format tables,schema fixed,strict and prefined.(ORM tools, Sequelize,typeORM,prisma).
+ ODM -> used with non-relational databases(no-sql), data format json-like documents, schema flexible,optional.(ODM tools,mongoose)
+
+
+51.Write Operation.
+ Gurantees the writing data.
+ await User.create(
+  { name: "Anand" },
+  { writeConcern: { w: "majority" } }
+);
+w:'majority' -> saved on most/all replica nodes (slower, safer)
+w:1 -> saved on primary node only(fast,less safe).
+
+52.Read concerns
+ Gurantees the reading correct data.
+ Read concern defines how reliable/consistent the data is when you read it from MongoDB.
+ await User.find().readConcern("majority");
+
+ majority->only reads data confirmed by majority.
+ local → fastest, may read unconfirmed data
+
+53.Change Streams.
+ It allow application to listen to real-time changes(insert,updates,delete) in mongo databases/collection.
+ It gives live updates whenever data changes.
+
+ const changeStream = User.watch();
+
+ changeStream.on("change", (change) => {
+   console.log("Something changed:", change);
+ });
+
+MongoDB uses something called oplog (operation log) in replica sets.Change Streams read from that log and notify your app.
+
+54.Working set.
+ It is a portion of database data and indexes that are actively/freequently used and kept in memory(RAM) for fast access.
+ Hot data that your application is currently using.
+
+55.bulkWrite
+ db.teachers.bulkWrite([{updateOne:{filter:{age:37},update:{$inc:{salary:2000}}}}]);
+ {ordered:true} -> if there is any error then it stopes else continues;(stops in first error).
+ {ordered:false} -> continiue if some operation fails.
+
+56.facet.
+ db.teachers.aggregate([
+  {
+    $facet: {
+      highSalary: [
+        { $match: { salary: { $gte: 50000 } } }
+      ],
+      highAge: [
+        { $match: { age: { $gte: 35 } } }
+      ],
+      total: [
+        { $count: "count" }
+      ]
+    }
+  }
+])
+
+57.NoSQL/SQL Injection.
+ When the query depends upon the user input. Both SQL injection and NoSQL injection happen when an application builds database queries using user input without properly controlling it.
+
+58.Balancer
+ In a sharded system the data is distributed across the shards.
+ The balancer:
+  Moves the data between shards, keep data evenly distributed, prevent on shard from getting overloaded.
+
+i.sh.startBalancer()-> starts the balancer.
+ii.sh.stopBalancer()-> stops the balancer.
+iii.sh.getBalancerState() -> Check balancer status.only tells ON/OFF status.
+
+59.COLLSCAN vs IXSCAN
+ COLLSCAN -> MongoDB scans the entire collection.
+ IXSCAN -> MongoDB uses index to search data.
+
+60.Explain().
+ Used to analyze the query runs, from this i can understand the speed/performance.(does not give a stopwatch output).
+
+ db.teachers.find({age:{$gte:37}}).explain().
+
+61.Regex vs Text 
+$regex-> partial searches.
+$text-> full text searches.(db.rooms.createIndex({ type: "text" }))
+(db.rooms.find({$text: { $search: "Deluxe Suite" }}))

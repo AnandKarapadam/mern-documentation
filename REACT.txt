@@ -1,0 +1,490 @@
+React Topics
+1.What is react.
+2.Library vs Framework.
+3.Vite.
+4.Vite vs CRA.
+5.HMR.
+6.DOM vs Virtual DOM
+7.SPA vs MPA
+8.CSR vs SSR
+9.Default vs Named Exports.
+10.JSX.
+11.Components.
+12.LifeCycle methods.
+13.Props.
+14.State.
+15.Hooks.
+16.UseState().
+17.useEffect().
+18.CleanUp function.
+19.useRef().
+20.useContext().
+21.useNavigate().
+22.React routes.
+23.Route Params.
+24.Query Params.
+25.Why react is declerative?
+26.React Fragment
+27.Reconsiliation.
+28.Composition.
+29.Batching.
+30.ForwardRef.
+31.React Fiber.
+32.Strict Mode.
+33.Event pooling.
+34.Stateless Component
+35.Statefull Component
+36.Controlled Component
+37.Uncontrollec Component.
+38.Lazyloading.
+39.Conditional Rendering.
+40.Memoization.
+41.Reat.memo(pure component).
+43.useCallback()
+44.useMemo()
+45.HOC
+46.useReducer().
+47.Code Spliting.
+48.Hash Routing(#).
+49.Axios Interceptors.
+50.Abort Controllers.
+51.Pure Components.
+52.Portals.
+53.React compilation.
+54.React compiler.
+55.React fiber.
+56.Concurrent Mode/rendering.
+57.Can react exist without vDOM?How?
+58.Keys in react.
+59.Selective Rendering.
+60.dom.createElement vs React.createElement.
+61.Lazy initilization of state.
+62.useTransition().
+63.useDeferredValue().
+64.useId().
+65.SOLID Principles.
+66.use(), react 19.
+67.useFormState(),(react-dom).
+68.useActionState(),(react 19).
+69.useFormStatus(),(react-dom).
+70.useOptimistic()
+
+
+1.What is React?
+ React is a js library used to build user interface very efficiently and fast.
+ Created by facebook meta.
+ Limitation -> Needs extrenal libraries, like react-router, state management, http request.
+
+2.Library vs Framework
+Library -> It is group of functions or tools we use it when we need it. More flexible and lightweight.(React,jqery).
+Framework -> It provides a complete structure from building an application. Heavy weight.(Angular,Django,Spring). 
+
+3.Vite
+ It is a modern frontend build tool and development server used to create very fast web apps.
+
+4.Vite vs CRA
+ Vite -> Use native es modules. Supports TS,jsx, environment variable.
+ CRA -> Bundles with webpack. Supports TS,jsx,environment variables but need external configuration.
+
+5.HMR (Hot Module Replacement).
+ On development when i change a file in the project it only update the part of the file it does not reload the entire page.
+
+6.DOM VS Virtual DOM
+DOM -> Virtual representation of HTML document as a tree.Every node represents every element.
+Virtual DOM -> It is a copy of DOM used for Reconciliation, It will create a copy when component state changes.
+
+7.SPA vs MPA
+Single Page Application -> Loads on one HTML page only once js updates the content dynamicaly, faster navigation , initial loading can be slower.
+Muliple Page Application -> Loads a new HTML page from the server every time when we click on it. Slower navigation, initial loading very fast.
+
+8.Client Side Rendering vs Server Side Rendering.
+CSR -> Render happens in the brower using js(react,vue,Angular).
+SSR -> Rendering happens on the server brower recieves fully build HTML.
+
+9.Default Exports vs Named Exports.
+Default Exports -> Used to export one main component in file, only one per file possible.
+Named Exports -> Can be many in a file, i have to use the exact name while importing in another name.
+
+10.JSX (JavaScript XML).
+ It is a syntax extension allow us to write HTML inside js.
+
+11.Components
+ It is a reusable piece of UI. It can be navbar,button etc.
+ Two types:
+ a.Class Components.
+  Componets made up of class. 
+ b.Functional Components.
+  Components made up of functions.
+
+12.LifeCycle methods.
+ Special functions that executes on different phases/stages of components life. Mounting phase, updaing phase, unmounting phase.
+
+13.Props.
+ Stands for properties it is a piece of data we pass from parent to child. It is unmutable as well because data flow become unpredictable.
+
+14.State.
+ It is piece of data that can change over time.When ever state changes the component rerenders.
+
+15.Hooks
+ Allow as to use LifeCycle methods , Ref , states ect.
+
+16.useState();
+ It is hook that allow as to create state in a component.
+
+17.useEffect()
+ It is a hook that allow as to implement LifeCycle methods in functional components.
+
+18.CleanUp function.
+ Special type of function that runs whenever the component unmounts and before effect runs again. Also it is used to solve memory leakage caused from event listerners and abort controllers.
+
+19.UseRef().
+ Used to store a mutable value that does not trigger re-render, also it is used to create a ref for DOM elements. It always return a object with a specific field called current where the data is stored.
+
+20.useContext().
+ It is used to create global data.useContext(),createContext().
+
+21.useNavigate().
+ It is used to programatically navigate between routes. it is a function.
+ let navigate = useNavigate();
+ navigate("/home");
+ navigate("/home",{replace:true})-> does not create a entry in history.
+ navigate(1)->move forward.
+ navigate(-1)->move backward.
+
+22.React Routes.
+"react-router-dom" is the library used to implement routing in react application.
+-><BrowerRoutes> - used to wrap the app to enable routing.
+-><Routes> - wraps the entrire routes.
+-><Route path="/" element={}>- create routes.
+-><Link> - create link that does not reload the page.
+-><Navlink> - to create link also i can active style the link.
+-><outlet> - placeholder for child routes.
+
+23.Route Params.
+ useParams() hook is used to access params.
+ let {id} = useParams();
+
+24.Query Parameters.
+ let location = useLocation();
+ let querySearch = new URLSearchParams(location.search);
+ let name = querySearch.get("name");
+
+25.Why react is declerative?
+ React is declerative because we only want to describe what and how UI should look like for a given state and react handles how to update the DOM.
+
+26.React Fragment
+ Built in component what groups the html elements without using a extra element.
+ <></>
+ <React.Fragment></React.Fragment>
+
+27.Reconciliation
+ It is a runtime process that allow as to efficiently update the DOM elements. It uses virtual DOM for effient dom updates.
+ First it take a copy of DOM tree and when state changes it take another copy and compare it and only changes the updated elements instead of recreating the entire Dom elements(diffing algorithm).
+
+28.Composition
+ Building complext Componets using multiple components.
+
+29.Batching
+ It groups the multiple state changes into one so it does not rerender more.
+
+30.ForwardRef
+ It is used to accept a ref as property from parent.We cannot pass a ref from parent as prop we have to use ForwardRef in the child.
+
+ const InputComp = ForwardRef((props,ref)=>{
+    return <input ref ={ref}>
+ }) 
+
+ function app(){
+    const InputRef = useRef();
+    return (<InputComp ref ={InputRef}>)
+ }
+
+31.React Fiber.
+ Engine for reconciliation. Before fiber react updates where synchronous so, fiber help as to break the renders into small units and it can pause,resume renders and prioritise the important upadtes.
+
+32.Strict Mode(Built-in component).
+ It allow as to find the potential errors while development. Errors like LifeCycle methods, depriciated apis etc.
+
+33.Event pooling
+ It is a perfomance optimization technique in react it reuses the synthetic events instead of recreating it.
+
+ synthetic events -> it wraps the actual/native events that makes/ensure the events behave the same in different browers.
+
+34.Stateless Component.
+ Component that does not manage its own state it accept state as props.
+
+35.Statefull Component.
+ Component that manage its own state is known as statefull components.
+
+36.Controlled Components
+ It is a react form element where its value is controlled by react state.
+
+37.Uncontrolled Components
+ Componets value is not controlled by react state.
+
+38.Lazyloading.
+ It is a way to reduce the initial bundle size of the application. It only loads the components whenever its needed.
+
+ let About = React.lazy(()=>import('./about'));
+
+ <Suspense fallback={}><About></Suspense>
+
+39.Conditional Rendering.
+ Render components based up on conditions.(we use ternary operators).
+
+40.Memoization.
+ Memoization is the method to cache the result.
+
+41.React.memo
+ It prevent re-render of components unless the props change.
+ let About = React.memo((props)=>{
+
+ })
+
+42.useCallback(()=>,[]).
+ It is used to memoize a function. It prevents unnecessary recreation of function while rendering.
+
+ let fun = useCallback(()=>{
+    console.log("memoized function");
+ })
+
+43.useMemo(()=>);
+ It cache a result. For same input it does not run the whole logic again.
+
+ let {number,setNumber} = useState(5);
+
+ let double = (num){
+    return num*2;
+ }
+
+ let result = useMemo((number)=>{
+    return double(number);
+ },[number]);
+
+44.HOC (Higher Order Componets);
+ A componets that takes components and return a update Componet.
+
+45.useReducer().
+ Alternative as useState() it is used when state logic become complex.
+
+ function reducer(state,action){
+    Switch (action.type){
+        case "inc":
+        return state+1;
+        case "dec":
+        return state-1;
+
+        default:
+        return state
+    }
+ }
+
+ let app = ()=>{
+    let [count,dispatch] = useReducer();
+
+    return (
+        <h1>{count}</h1>
+        <button onClick={()=>dispatch({type:'inc'})}>+</button>
+    )
+ }
+
+ 47.Code Spliting
+  Breaking the application into small units, to reduce the initial bundle size.
+  Component level : let about = React.lazy(()=>import("./about"));
+      <Suspense fallback={<h1>loding..</h1>}>
+      <about/>
+      </Suspense>
+  Router level:let about = React.lazy(()=>import("./about"));
+   <Suspense fallback={<h1>loding..</h1>}>
+      <Route path="/about" element={about}>
+      </Suspense>
+
+48.Hash Routing.
+ Special routing that does not sent requst to server. work without backend configuration. used for static hosting.
+ <HashRouter>
+    <Routes></Routes>
+ </HashRouter>
+
+49.Axios Interceptors
+ Functions that run before request is sent and before the response is returned. It can modify the request and handle the responses.
+ i.Request Interceptors.(can sent token in every request without re-writing).
+ ii.Response Interceptors.
+
+50.Abort Controller
+ It is built in js feature used to cancel an ongoing asynchronous operation.
+
+51.Pure Components
+ It is a component that only re-render when their property change.
+
+52.Portals.
+ Let as to render a component outside its parent DOM hierrarchy, but still inside react component tree.
+
+53.React compilation(compiler).
+ React cannot run JSX directly it transpiled by using Babel.
+ i. Babel convert the JSX into a js.
+  <h1>hello</h1> -> React.createElement('h1',null,'Hello');
+
+ ii.Modern js is converted into older browser compactable way.
+ iii.Bundling -> css,images,components it is different files so it should be bundled into a Optimized files.(webpack,vite).
+ iv.React Dom rerender the UI -> React.createRoot(document.getElementById('root')).render(<App/>)
+
+54.React Compiler(React Forget).
+ It is a tool that automatically optimizes our react code during build time.
+ It makes apps faster without manually using optimization like useMemo, useCallback.
+ React Compiler automatically:
+   Detects unnecessary re-renders.
+   Memoizes values/functions.
+   Optimizes components.
+
+55.React Fiber.
+ Smart rendering system that breaks the UI updates into small units and schedules them efficiently. Also provide features like concurrent mode/rendering.
+ ->Breakes into units and schedules rendering.
+ i.Render phase->build fiber tree, can pause and resume.
+ ii.commit phase -> Applies changes to DOM.
+
+56.Concurrent Rendering/Mode.
+ Normaly react renders where synchronous, with concurrent mode react can pause,resume or cancel rendering. Prioritize important updates(typing, clicking).
+ Earlier it was called concurrent mode but now it is built in feature, enable by using:
+ i.setTransition->Marks updates as low priority.
+ ii.useTransition->Help show loading state.
+ iii.useDeferredValue->Delays updates.
+ Concurrent React allows React to work on multiple updates without blocking the UI, by prioritizing and interrupting rendering.
+ 
+ 57.Can React exist without VDOM?How?
+  Yes react can exist without vDOM , and in fact modern react is already moving partially in that direction.
+  i.Direct DOM updates(like solidJs)/surgical dom updates(state change->directly update the exact dom node).
+   SolidJs is a library-> track exact dependencies ,update only the specific DOM node.No diffing, no VDOM.
+  ii.Compile time optimization(sVelte)->
+  ii.React forget->removes unnecessary rerenders . This reduce reliance on vDOM diffing.
+
+58.Keys in react.
+ It is used during reconciliation to help react to identifiy which list items changed , were added, or removed.
+ On diffing react compares the items using key values(identity).
+ Used for ->
+ i. Looping(map()).
+ ii.Forcing component reset.
+  <UserForm key={userId} />
+  When users changes, react unmounts old components creates a freash new one.
+
+ ii.Switching between components.
+  {isLogin
+  ? <Form key="login" />
+  : <Form key="signup" />
+ }
+  Without keys react uses same component instance.
+  With keys react treat them as different components.
+
+59.Selective Rendering.
+ React updates only the components that are affected by a state/prop change, instead of re-rendering the entire UI.
+ React achives this by -> reconciliation, props/state tracking.
+ By using React.memo(),useMemo(),useCallback() react can achive true selective rendering.
+
+60.dom.createElement vs React.createElement()
+document.createElement->Creates real dom node immediately. It is Native browser API.
+React.createElement-> 
+            jsx:<div>Hello</div>
+            Transpiles to:React.createElement("div",null,"Hello")
+            it returns a object:{type:'div',props:{children:"Hello"}}.
+
+61.Lazy initilization of state.
+ The initial state function runs only once(on first render) instead of every render.
+ const [value, setValue] = useState(expensiveFunction());->runs on every render.
+ const [value, setValue] = useState(() => expensiveFunction());->only runs once.
+ use case:performance,memory efficiency,faster initial load.
+
+62.useTransition().[introduced in react 18].
+ Used for slow updates without blocking the UI. React mark this update as slow priority.
+ -> let us to tell react which react updates are low priority.
+
+ import { useTransition, useState } from "react";
+
+const [search, setSearch] = useState("");
+const [filtered, setFiltered] = useState(products);
+
+const [isPending, startTransition] = useTransition();
+
+function handleChange(e) {
+  const value = e.target.value;
+
+  // 🔥 urgent (instant)
+  setSearch(value);
+
+  // 🐢 non-urgent (heavy work)
+  startTransition(() => {
+    const result = products.filter(p =>
+      p.name.toLowerCase().includes(value.toLowerCase())
+    );
+    setFiltered(result);
+  });
+}
+
+63.useDifferedValue().(react 18).
+ It is a React hook that returns a delayed version of a value, allowing heavy updates based on that value to happen later so the UI stays fast and responsive.
+ ->It just delays when a value updates, which indirectly can reduce heavy rendering impact.
+ ->useDeferredValue holds the previous value for a short time and updates to the new value later.
+
+ import { useDeferredValue, useState } from "react";
+
+const [search, setSearch] = useState("");
+
+// 👇 delayed version
+const deferredSearch = useDeferredValue(search);
+
+const filtered = products.filter(p =>
+  p.name.toLowerCase().includes(deferredSearch.toLowerCase())
+);
+
+return (
+  <>
+    <input value={search} onChange={e => setSearch(e.target.value)} />
+
+    <ul>
+      {filtered.map(p => <li key={p.id}>{p.name}</li>)}
+    </ul>
+  </>
+);
+
+64.useId();
+ Used to create unique id that stays consistant across renders.
+
+ import { useId } from "react";
+
+function MyComponent() {
+  const id = useId();
+
+  return (
+    <>
+      <label htmlFor={id}>Name</label>
+      <input id={id} />
+    </>
+  );
+}
+
+65.SOLID Principle.
+ S(Single Responsibility Principle SRP) -> Split components, use custom hooks. One component is for one job.
+ O(Open Closed Principle OCP) -> Open for extension, Closed for modification. You should be able to add new functionality without changing existing code.
+ L(Liskov Substitution Principle LSP) -> You should be able to replace a parent component with a child component without breaking the expected behaviour.
+ I(Interface Segrigation Principle ISP) -> Don't force components to accept props they don't need.
+ D(Dependency Inversion Principle DIP)(Dependency Injection) -> High-level components should not depend on low-level components. Don't hardcode dependencies.Hard to debug if error happens.
+
+66.use(),(Introduced in react 19).
+ React hook that let us to read async data (like promises) directly inside a component. No need for: useEffect(),useState().
+ eg:const data = use(fetchData());
+  simply as it is.
+ -> I must use Suspense for wrapping the component where i used use().
+
+67.useFormState().(in react-dom),(forms only).
+ Hook that help us to manage form submission and response easily.
+
+68.useActionState(), (react 19, to replace useFormState),(forms+buttons).
+ React hook that manages state based on an action(like form submission).
+
+69.useFormStatus(),(react-dom).
+ It is a react hook that tells us the status of form submission(like loading/pending).
+
+70.useOptimistic().
+ Hook that let us to update the UI immediately before the real result come from the server.
+ with useOptimistic:
+  ->add to cart.
+  ->UI updates immediately.
+  ->Server updates later.

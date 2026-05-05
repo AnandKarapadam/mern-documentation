@@ -1,0 +1,145 @@
+Redux Topics.
+1.What is redux?
+2.Principles of redux.
+3.Slice.
+4.Thunk.
+5.Flow of redux.
+6.Refreash Token
+7.How to persist redux state?.
+8.Window object instead of redux.
+9.Store.
+10.Action.
+11.Reducer.
+12.Error Boundaries.
+13.Boilerplate.
+14.Render props.
+15.Redux toolkit.
+16.Redux, MobX, Zustand.
+17.LocalStorage disadvantages.
+18.MapStateToProps.
+19.mapDispatchToProp.
+20.Connect.
+21.Immer.
+22.Shadow DOM.
+23.React Profiler.
+24.useLayoutEffect.
+25.context vs redux.
+26.Static vs Dynamic Memory allocation.
+
+1.What is redux?
+ Redux is a state management library used to manage global application state in a predictable way. Redux has powerfull debugging tool.
+
+2.Principles of Redux.
+ i.Single source of truth - all the states are stored in a central place called store.
+ ii.States are read-only - I cannot directly mutate the state I have to dispatch an action.
+ iii.Changes Through Pure functions - Reducers decides state change.
+
+3.Slice
+ Slice is a part of global redux state that contains: initial state, reducers, thunks, saga, actions.
+ Created by 'createSlice({name:"users",initialState:{users:[]}})'
+
+4.Thunk
+ Reducers cannot be asynchronous so we use thunks (createAsyncThunk("fetch/users",async(_,{try{}catch{}}))).
+ flow - dispatch->thunk runs->pending state->fulfilled or rejected ->state udpates.
+
+5.Flow of redux.
+ Dispatch an action->reducer runs->store updates with new states->React-component that use useSelector re-render with new value -> UI updates.
+
+6.Refreash Token
+ It is a fallback token for access token expires. While creating a token we also creates a refreash token it is stored in db and client. when the access token expires this token is send to the backend after verification new access token is created.
+ So user doesn't need to login again and again.
+
+7.How to persist redux state?
+i.redux-persist library.
+ii.dehydration methods -> it fetches the required states app starts.
+  Dehydration = converting your Redux state into a storable format (usually JSON) and saving it (e.g., localStorage)
+  Rehydration = loading that saved state back into Redux when the app starts.
+
+8.Window object instead of Redux
+ React cannot trackt the changes in window object it will not trigger re-render so the values remains the same.
+
+9.Store
+ Store is where all the apps state is stored.
+
+10.Action.
+ Action describes what happens to the state. It has two main parts:
+ i.Type->Describes what happens to the state.
+ ii.Payload->Contain  a data.
+
+11.Reducer
+ It is a pure function used to update the state.
+
+12.Error Boundaries.
+ It is a react component that catches errors in its child component and instead of chrashing the application it shows a fallback UI.
+ Can Catch -> Rendering errors, LifeCycle errors.
+ Cannot Catch -> Event handler error.
+
+13.Boilerplate
+ It is a repetative code that we must written again and again with little or no change.
+
+14.Render props.
+ It is a function passed as props to a component that decides what to render.
+
+15.Redux Toolkit
+  It allow us to implement redux logic easily to our application.
+
+16.Redux vs MobX vs Zustand.
+ Redux -> It is predictable state management, it has a flow.It has store,reducer, dispatch,action, payload.
+ MobX -> Reactive state management, UI automatically reacts when state changes.Not predictable.
+ Zustand -> Minimal state management, very lightweight and simple with very little code.
+
+17.LocalStorage Disadvantages.
+ 1. Security risk - not encrypted can only be string.
+ 2. Less storage 8mb - 10mb.
+ 3. No expiry.
+
+18.mapStateToProps 
+ Used to read data from redux store and pass it as props to component. 
+
+19.mapDispatchToProp
+ Used to dispatch an action from a component.
+
+20.Connect.
+ Redux function used to connect react component to redux store. 
+
+21.Immer
+ Immer is js library that let us to write code like we are mutating data, but actually keeps it immutable(unchanged) behind the scenes.
+ It does not mutate the original it just create a new object with updated data.
+
+22.Shadow DOM.
+ It is a way to encapsulate HTML,CSS and javascript so it does not affect the rest of the page.
+ ->CSS and JS are global, One components styles can affect others.
+ <div id="host"></div>
+ const host = document.getElementById("host");
+ const shadow = host.attachShadow({ mode: "open" });
+
+ shadow.innerHTML = `
+  <style>
+     p { color: red; }
+   </style>
+   <p>Hello from Shadow DOM</p>
+ `;
+
+23.React Profiler.
+ It is a tool used to measure and analyze the performance of React application.It identifies:
+ ->slow components.
+ ->Unnecessary Rerenders.
+
+24.useLayoutEffect(()=>,[])
+ Runs before the screen updates. Runs before UI is shown.
+ ->First DOM changes->useLayoutEffect runs -> screen shows.
+
+ useLayoutEffect(()=>{
+  console.log("runs before screen update");
+ },[])
+  ->Mainly used to get the height,width and position.
+
+25.context vs redux.
+ context -> used to share data, avoids prop drilling, all consumers re-renders, simple structure.
+ redux -> It handles the entire application states,only needed components re-render, well structured predictable data flow.
+
+26.Static vs Dynamic memory Allocation.
+ Static Memory Allocation -> Memory is allocated at compile time. Size is fixed, cannot change later. Faster.
+ Dynamic Memory Allocation -> Memory is allocated at runtime. Size is dynamic, slightly slower.
+
+ In javascript memory is handled automatically. Stack memory(primitive values like static), Heap Memory(non-primitives it is like dynamic).
