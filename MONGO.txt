@@ -261,7 +261,7 @@ db.users.aggregate([
 ]);
 
 45.Distinct (db.users.distinct("age",{name:"Anand"}))
-Returns array of unique field values.
+Returns array of unique field values. 
 
 46.Regex (Regular Expression)
 Regex is used for text searches.

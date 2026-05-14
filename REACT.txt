@@ -81,6 +81,7 @@ Framework -> It provides a complete structure from building an application. Heav
 
 3.Vite
  It is a modern frontend build tool and development server used to create very fast web apps.
+ - Build Tool -> It converts our source code into production ready code. It bundles our code (does not use babel by default) it uses EsBuild instead of that. 
 
 4.Vite vs CRA
  Vite -> Use native es modules. Supports TS,jsx, environment variable.
@@ -98,8 +99,8 @@ Single Page Application -> Loads on one HTML page only once js updates the conte
 Muliple Page Application -> Loads a new HTML page from the server every time when we click on it. Slower navigation, initial loading very fast.
 
 8.Client Side Rendering vs Server Side Rendering.
-CSR -> Render happens in the brower using js(react,vue,Angular).
-SSR -> Rendering happens on the server brower recieves fully build HTML.
+CSR -> Render happens in the brower using js(react,vue,Angular).(REACT).  
+SSR -> Rendering happens on the server brower recieves fully build HTML.(NEXT.js,EJS).
 
 9.Default Exports vs Named Exports.
 Default Exports -> Used to export one main component in file, only one per file possible.
@@ -126,7 +127,7 @@ Named Exports -> Can be many in a file, i have to use the exact name while impor
  It is piece of data that can change over time.When ever state changes the component rerenders.
 
 15.Hooks
- Allow as to use LifeCycle methods , Ref , states ect.
+ Hooks are special functions.Allow as to use LifeCycle methods , Ref , states ect.
 
 16.useState();
  It is hook that allow as to create state in a component.
@@ -177,6 +178,11 @@ Named Exports -> Can be many in a file, i have to use the exact name while impor
  <></>
  <React.Fragment></React.Fragment>
 
+ unless this error will raise -> Adjacent JSX elements must be wrapped in an enclosing tag.
+
+ -> using a div adds unnecessary element.
+ -> We must group because REACT MUST RETURN ONE ROOT ELEMENT NOT MANY.(without fragments it always be many elements).
+
 27.Reconciliation
  It is a runtime process that allow as to efficiently update the DOM elements. It uses virtual DOM for effient dom updates.
  First it take a copy of DOM tree and when state changes it take another copy and compare it and only changes the updated elements instead of recreating the entire Dom elements(diffing algorithm).
@@ -201,6 +207,12 @@ Named Exports -> Can be many in a file, i have to use the exact name while impor
 
 31.React Fiber.
  Engine for reconciliation. Before fiber react updates where synchronous so, fiber help as to break the renders into small units and it can pause,resume renders and prioritise the important upadtes.
+ Fiber is React’s custom data structure and rendering algorithm used to efficiently update the UI.
+ Fiber allows React to:
+pause work
+continue later
+prioritize updates
+split rendering into small units.
 
 32.Strict Mode(Built-in component).
  It allow as to find the potential errors while development. Errors like LifeCycle methods, depriciated apis etc.
@@ -208,7 +220,7 @@ Named Exports -> Can be many in a file, i have to use the exact name while impor
 33.Event pooling
  It is a perfomance optimization technique in react it reuses the synthetic events instead of recreating it.
 
- synthetic events -> it wraps the actual/native events that makes/ensure the events behave the same in different browers.
+ synthetic events(onClick,onChange) -> it wraps the actual/native events that makes/ensure the events behave the same in different browers.
 
 34.Stateless Component.
  Component that does not manage its own state it accept state as props.
@@ -280,7 +292,7 @@ Named Exports -> Can be many in a file, i have to use the exact name while impor
  }
 
  let app = ()=>{
-    let [count,dispatch] = useReducer();
+    let [count,dispatch] = useReducer(reducer,0);
 
     return (
         <h1>{count}</h1>

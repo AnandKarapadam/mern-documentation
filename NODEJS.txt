@@ -69,6 +69,7 @@ NodeJS Topics
 68.Import vs Require.
 69.__directory and Absolute vs Relative path.
 70.CSRF (cross-site request forgery).
+71.XSS(cross-site scripting).
 
 1.What is Node.js?
  Node.js is a js runtime environment that allow as to write and execute js code outside the browers. It is built in chrome's v8 engine, which compiles js into machine code, making it faster and effient.
@@ -110,7 +111,7 @@ Package-lock.json -> It ensure right version of dependenices are installed.Lock 
  Allow us to create,listen or emit custom events or named events.
 
   let eventemitter = reqire('events');
-  let emitter = eventemitter();
+  let emitter = new eventemitter();
 
   emitter.on('greet',(name)=>{console.log(name)});
   emitter.emit('greet','anand');
@@ -119,10 +120,26 @@ Package-lock.json -> It ensure right version of dependenices are installed.Lock 
  Streams let as to process large files in chunks small or units instead of loading them directly in memory at once. Handled by buffer class.
  Reduces memory usage by reusing the memory.
  Helps to handle large data efficiently and improves perfomance.
- 1.Readable Sterams -> For reading a big file.
- 2.Writable Streams -> For writing a big file.
+ 1.Readable Sterams -> For reading a big file.(fs.createReadStream('file','utf-8'))
+ 2.Writable Streams -> For writing a big file.(fs.createWriteStream('input.txt').write('hello').end());
  3.Duplex Streams -> For reading and writing.
  4.Transform Streams -> To update streams while reading or writing.
+
+Readable Streams:
+let fs = require('fs');
+let readStreams = fs.createReadStream('input.txt','utf-8');
+readStreams.on('data',(chunk)=>{
+  console.log('Chunk:',chunk);
+})
+readStreams.on('end',()=>{
+  console.log('End');
+})
+Write Streams:
+const fs = require('fs');
+const writeStream = fs.createWriteStream('input.txt');
+writeStream.write('H3llo AnandKV\n');
+writeStream.write('End');
+writeStream.end()
 
 11.Stateless Protocols(every http requests are stateless).
 Protocols where each request from a client to a server is independent it does not depend or track the previous reqeust that clients make.
@@ -298,7 +315,12 @@ Header-> headers have the metadata about the req or res.
  -> Which type data is send, who sent it, how it should be handled.
 
 34.Cron Job
- It is used to schedule a task on a specific time.(Daily emails,daily notificatins)
+ It is used to schedule a task on a specific time.(Daily emails,daily notificatins).
+ const cron = require('node-cron');
+
+cron.schedule('* * * * * *',()=>{//every second '* * * * *' -> every minute
+  console.log("hello");
+})
 
 35.Token interospection
  Checking Validation of token in the backend by asking Authorization server.
@@ -341,7 +363,7 @@ Header-> headers have the metadata about the req or res.
  Architecture that works based up on event occures.
 
 40.App.local
- It is used to store data, that data is available across the node application.
+ It is used to store data in our app(not on extra file like .env), that data is available across the node application.
 
  app.locals.name = "anandKV";
  console.log(app.locals.name)//anandKV
@@ -520,9 +542,6 @@ async function deleteFile() {
 }
 run(deleteFile);
 
-
-
-
 59.websockets vs socket.io(chat apps,live notifications,multiplayer dashboards).
 websockets -> it is a protocol that enables real-time communication, it is built in node.js.starts as http request upgrades to websockets. connection stays open.
 socket.io -> it is a library that uses websockets to make real time communication easier. provides more features(chat groups,broadcasting,fallback supports).
@@ -568,6 +587,11 @@ sse-> protocol is http, persistant,one way server->client, realtime, medium effi
 66.Salting.
  It is a method of adding random values to a password before hashing.
  -> if two users has same password, hackers can dectect it.
+const salt = crypto.randomBytes(16).toString('hex');
+const hash = crypto
+  .createHash('sha256')
+  .update(password + salt)
+  .digest('hex');
 
 67.REST API principles.
  1.Client-Server Architecture -> frontend and backend are seperate.
@@ -601,4 +625,15 @@ Relative path -> Path relative to the current file.(./,../).
 71.XSS (cross-site scripting).
  The attacker injects harmful js into a trustable website, that script runs on other users brower to steal data.
  Preventation methods - helmet,sanitize user input.
+
+ The attacker tries to inject malicious/harmful JavaScript into a trusted webpage:
+ ->Website stores/displays that script
+ ->Another user visits the page
+ ->Browser executes the attacker’s script automatically
+ ->The attacker can:
+    steal cookies/session tokens
+    redirect users
+    make fake requests
+    modify the page
+    act as the logged-in user.
 

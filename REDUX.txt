@@ -37,6 +37,7 @@ Redux Topics.
 3.Slice
  Slice is a part of global redux state that contains: initial state, reducers, thunks, saga, actions.
  Created by 'createSlice({name:"users",initialState:{users:[]}})'
+ -> In redux slice is a way to group state, reducers, actions.
 
 4.Thunk
  Reducers cannot be asynchronous so we use thunks (createAsyncThunk("fetch/users",async(_,{try{}catch{}}))).
