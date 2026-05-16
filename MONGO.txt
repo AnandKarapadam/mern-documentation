@@ -61,6 +61,7 @@ MongoDB
 59.COLLSCAN vs IXSCAN.
 60.Explain().
 61.$regex vs $text
+62.$addFields.
 
 1.What is MongoDB?
  MongoDB is a NoSQL, non-relational database that stores data in JSON-like documents, key-value pairs, or graphs,wide column. It is highly efficient for handling large datasets and does not require a fixed schema.
@@ -375,3 +376,7 @@ iii.sh.getBalancerState() -> Check balancer status.only tells ON/OFF status.
 $regex-> partial searches.
 $text-> full text searches.(db.rooms.createIndex({ type: "text" }))
 (db.rooms.find({$text: { $search: "Deluxe Suite" }}))
+
+62.$addFields
+ Aggregate stage used to add new fields or modify existing fields in documents.
+ -> It does not change the actual collection data unless you save the result.

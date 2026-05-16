@@ -513,3 +513,14 @@ console.log(id1 === id2); // false
     new String();
     new Number();
     new Date();
+
+64.Labels.
+  Labels are names attached to loops or blocks;
+ myBlock: {
+   console.log("Start");
+
+   break myBlock;
+
+   console.log("Never runs");
+}
+//Start
