@@ -70,6 +70,12 @@ NodeJS Topics
 69.__directory and Absolute vs Relative path.
 70.CSRF (cross-site request forgery).
 71.XSS(cross-site scripting).
+72.MORGAN.
+73.Idempotency.
+74.API Endpoints.
+75.Axios CancelToken.
+76.API versioning.
+77.Service Worker.
 
 1.What is Node.js?
  Node.js is a js runtime environment that allow as to write and execute js code outside the browers. It is built in chrome's v8 engine, which compiles js into machine code, making it faster and effient.
@@ -457,6 +463,7 @@ execFile('node',['./child.js'],(error,stdout,stderr)=>{
 
 49.Content Negotiation.
  Decides in which format the server sends the response to the client.
+ -> During request in headers we set Accept: application/json  so it client decides what to request.
 
 50.ExeFile vs Exec
 ExeFile -> allow node.js to execute an executable file without using shell.
@@ -637,3 +644,33 @@ Relative path -> Path relative to the current file.(./,../).
     modify the page
     act as the logged-in user.
 
+72.MORGAN.
+ It is a middleware used in node.js and express application to log HTTP requests.
+ -> to see request methods.
+ -> URL.
+ -> status code.
+ -> IP address.
+ -> Response Time.
+
+73.Idempotency
+ In web development and APIs, an operation is idempotent if repeating the request does not create additional changes after the first successful execution.
+ -> If request with same URL for many times it will always gives the same result.
+
+74.API Endpoints.
+ Website server -> https://example.com
+ API Endpoints -> https://example.com/users.
+
+75.Axios CancelToken
+Axios CancelToken is a feature used to cancel an ongoing HTTP request before it completes.
+
+76.API versioning.
+ API versioning is a way to manage changes in your API without breaking existing users.
+ -> Used to safely update the code. Some users does not refreash the page, or close the tab so the previous so if i make a change in the response that crashes the application.
+    So we use api versioning so both users the users that get the updated version and the older version get the relevent response.
+/api/users -> initial api for old users.
+/api/v1/users  → stable forever - older api for old users
+/api/v2/users  → new improvements - new api for new users.
+
+77.Service Worker(PWA).
+ It is a background script that runs in the browser and act like a middlelayer between webapp and internet. Heavily used in PWA.
+ -> Cache data and enable offline features.
