@@ -76,6 +76,9 @@ NodeJS Topics
 75.Axios CancelToken.
 76.API versioning.
 77.Service Worker.
+78.app.all();
+79.Dead Code Elimination (DCE).
+80.Tree shaking.
 
 1.What is Node.js?
  Node.js is a js runtime environment that allow as to write and execute js code outside the browers. It is built in chrome's v8 engine, which compiles js into machine code, making it faster and effient.
@@ -674,3 +677,33 @@ Axios CancelToken is a feature used to cancel an ongoing HTTP request before it 
 77.Service Worker(PWA).
  It is a background script that runs in the browser and act like a middlelayer between webapp and internet. Heavily used in PWA.
  -> Cache data and enable offline features.
+
+78.app.all()
+ In Express.js, app.all() is a method used to handle all HTTP methods for a given route.
+
+const express = require('express');
+const app = express();
+
+app.all('/test', (req, res) => {
+  res.send('This runs for ALL HTTP methods');
+});
+
+app.listen(3000);
+
+79.Dead Code Elimination (DCE).
+ It is a Build Optimization technique where unused codes are removed from final build.
+
+ function usedFunction() {
+  console.log("Used");
+}
+
+function unusedFunction() {
+  console.log("Unused");
+}
+
+usedFunction();
+ -> here unusedFunction is dead code so there is no use so it removes from final build.
+ -> Done by Vite,Webpack etc.
+
+80.Tree Shaking.
+ It is a build optimization technique that removes unused exports/imports from final buil.

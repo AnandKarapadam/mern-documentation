@@ -81,6 +81,7 @@ JavaScript Topics
 61.Array.from().
 62.Symbol.
 63.Short Polling.
+64.Types of Constructor.
 
 1.JavaScript(build by v8 engine)(js parses->convert into bytecode->JIT->execute)
 It is a interpreted language scripting language used to create webapplications interactive and dynamic. JS interpreted it dosen't need external compilation, js uses Just-In-Time compilation for execution.
@@ -502,3 +503,13 @@ console.log(id1 === id2); // false
 62.Short Polling.
  Short Polling -> The client keep sending requests to the server at fixed intervals, even if there is no new data.
 
+63.Types of Constructors.
+ i.Default Constructor -> A constructor that does not takes a parameter.
+ ii.Parameterized Constructor -> A constructor that takes arugments.
+ iii.Functional Constructor -> To create a object structure.
+ iv.Built-in Constructor -> 
+    new Object();
+    new Array();
+    new String();
+    new Number();
+    new Date();
