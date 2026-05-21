@@ -68,7 +68,10 @@ React Topics
 68.useActionState(),(react 19).
 69.useFormStatus(),(react-dom).
 70.useOptimistic()
-
+71.One-way Data binding.
+72.Array index as key.
+73.Async function passed as Callback in useEffect.
+74.BrowerRoutes vs Hash routing.
 
 1.What is React?
  React is a js library used to build user interface very efficiently and fast.
@@ -500,3 +503,17 @@ function MyComponent() {
   ->add to cart.
   ->UI updates immediately.
   ->Server updates later.
+
+71.One-way data binding/Undirectional data flow.
+ One-way data binding means data flows in a single direction, from the component's state to the UI.
+
+72.Why array index is not a good practice for keys in react?
+ -> when i add a element in the 0th index, react thinks like every items changed. This can cause unnecessary DOM updates.
+ -> solution is using unique IDs for every element.
+
+73.Can we pass async callbacks in useEffect.
+ Answer is NO because react useEffect expect undefined or a cleanup function as return, so if I use async function it returns promise that will make a error.
+
+74.BrowserRoutes vs HashRouter.
+ BrowserRoutes -> enables proper routing for apps.
+ HashRoutes -> Every thing after # stays in the browser, not sent to server. Server recives only example.com so refreash never breakes.

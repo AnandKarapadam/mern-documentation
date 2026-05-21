@@ -82,6 +82,9 @@ JavaScript Topics
 62.Symbol.
 63.Short Polling.
 64.Types of Constructor.
+65.Labels.
+66.Prototypal Pollution.
+67.Static methods vs Normal methods - class.
 
 1.JavaScript(build by v8 engine)(js parses->convert into bytecode->JIT->execute)
 It is a interpreted language scripting language used to create webapplications interactive and dynamic. JS interpreted it dosen't need external compilation, js uses Just-In-Time compilation for execution.
@@ -197,6 +200,11 @@ Null-> To represent intentional absence of value.
 
 12.Closure
  Behaviour of js a function that always remember the values in the lexical scopes.Used for encapsule data that restrict direct access to the data.
+ Applications -> 
+ Encapsulate value or create private variable, 
+ Asynchronous programming-setTimeOut,setInterval and event handlers(closures are essential for timerfunctions and events, it allow as to remember the values in the callbacks).
+ Used in Currying,
+ Memoization.
 
 13.Global Execution Context (GEC).
  It is a environment where the js code is executed.It has two phases:
@@ -524,3 +532,29 @@ console.log(id1 === id2); // false
    console.log("Never runs");
 }
 //Start
+
+65.Prototype Pollution.
+ It is a JavaScript vulnarability where attackers can modify prototype of object, affecting all object that inherit from it.
+ use -> Object.hasOwn()
+
+66.Static Method vs Normal Methods - class.
+Static method(Utility/helper functions) -> Belongs to the class itself. Cannot access 'this' instance data.No need for object creation.
+Normal Methods(object behaviour) -> Belongs to the object.Can access 'this' instance data.Need object creation.
+
+class User{
+  constructor(){
+    this.name = 'Anand'
+  }
+  greet(){
+    console.log("hello, "+this.name);
+  } 
+  static Address(){
+    console.log('Kerala');//cannot access this.
+  }
+}
+
+User.Address();
+let u = new User();
+u.greet();
+
+//We use static methods when the method does not depend on object-specific data.

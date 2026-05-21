@@ -24,6 +24,8 @@ DSA topics.
 23.Array to represent heaps.
 24.Pruning.
 25.Greedy Algorithm.
+26.Dynamic Programming.
+27.AVL vs Red-Black Tree.
 
 1.Asymptotic notations.
  It is a mathematical tool used to describe the time and space complexity of an algorithms as input size grows.
@@ -208,3 +210,7 @@ Arrays are used for heaps because they are space-efficient, cache-friendly, and 
 
 26.Dynamic Programming.
  It is a way to solve a problem faster by saving the result and reusing it.
+
+27.AVL tree vs Red-Black tree.
+AVL -> Strictly Balanced.(heightOfleft-heightOfright <= 1).(Strictly Balanced->left and right subtree heights almost equal.skewed tree is not possible)
+Red-Black -> Loosely Balanced.(It does NOT require perfectly equal heights.)

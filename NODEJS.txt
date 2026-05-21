@@ -79,6 +79,7 @@ NodeJS Topics
 78.app.all();
 79.Dead Code Elimination (DCE).
 80.Tree shaking.
+81.Router Chaining.
 
 1.What is Node.js?
  Node.js is a js runtime environment that allow as to write and execute js code outside the browers. It is built in chrome's v8 engine, which compiles js into machine code, making it faster and effient.
@@ -707,3 +708,25 @@ usedFunction();
 
 80.Tree Shaking.
  It is a build optimization technique that removes unused exports/imports from final buil.
+
+81.Router Chaining.
+1. Cleaner Code
+
+Keeps all operations related to the same route together.
+
+2. Better Readability
+
+Easy to understand which methods belong to a particular endpoint.
+
+3. Reduces Repetition
+
+You don’t need to repeat the same route path multiple times.
+
+4. Easier Maintenance
+
+If the route changes, you only update it once.
+eg:
+ router.route("/users")
+  .get(getUsers)
+  .post(createUser)
+  .put(updateUser);
