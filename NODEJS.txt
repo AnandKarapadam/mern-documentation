@@ -80,6 +80,10 @@ NodeJS Topics
 79.Dead Code Elimination (DCE).
 80.Tree shaking.
 81.Router Chaining.
+82.Piping.
+83.Reactor Pattern.
+84.Exit Code.
+85.Node Environment.
 
 1.What is Node.js?
  Node.js is a js runtime environment that allow as to write and execute js code outside the browers. It is built in chrome's v8 engine, which compiles js into machine code, making it faster and effient.
@@ -615,8 +619,8 @@ const hash = crypto
  8.caching -> Responses will  be cached if possible. It improves performance.
  
 68.Import vs Require().
- Require(commonJS) -> Traditional, Synchronous(loads modules immediately).
- Import(ES module) -> Modern, Asynchronous(loads modules in background), need configuration in package.json we should enable 'type':'module', top level only.
+ Require(commonJS-traditional) -> Traditional, Synchronous(loads modules immediately).
+ Import(ES module-modern) -> Modern, Asynchronous(loads modules in background), need configuration in package.json we should enable 'type':'module', top level only.
 // ❌ Not allowed inside condition, must called on top-level.
 if (condition) {
   import lib from './lib';
@@ -730,3 +734,39 @@ eg:
   .get(getUsers)
   .post(createUser)
   .put(updateUser);
+
+82.Piping
+ It is a mechanism that connects a readable streams directly to a readable stream.
+ While reading data from Read stream, I want to write from the read data.
+
+const fs = require('fs');
+
+const readStream = fs.createReadStream('input.txt');
+const writeStream = fs.createWriteStream('output.txt');
+
+readStream.pipe(writeStream);
+
+83.Reactor Pattern.
+ It is a design pattern used in react to handle multiple operations.
+ Node.js follow this pattern by:
+ 1.even loop
+ 2.event queue.
+ 3.libuv.
+ Instead of waiting for operations to finish, register events and react when they are completed.
+
+84.Exit Code.
+ It is a numeric code that returns from Node.js process when it treminates.
+ It tell to os, shell, PM2 etc whether the program is successfully completed or not.
+ -> to forcefully do we can use process.exit().
+
+85.Node_Env
+ It is used to define which environment node applicatioin is currently in like project is under development, deployed(Production) or test(testing environment).
+
+86.Monolithic vs Microservice architecture.
+Monolithic-> combine all components into one application. MVC.
+Microservice -> Divide our application into small independent services.
+
+87.REST api vs GraphQl
+REST -> Multiple endpoints, fixed response structure. eg: GET /user/1
+GraphQl -> Single Endpoints, clients chooses data.
+ eg:{user(id:1){name,email}};

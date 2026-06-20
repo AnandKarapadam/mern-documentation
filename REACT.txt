@@ -72,6 +72,7 @@ React Topics
 72.Array index as key.
 73.Async function passed as Callback in useEffect.
 74.BrowerRoutes vs Hash routing.
+75.Refreash Token Flow.
 
 1.What is React?
  React is a js library used to build user interface very efficiently and fast.
@@ -107,7 +108,7 @@ SSR -> Rendering happens on the server brower recieves fully build HTML.(NEXT.js
 
 9.Default Exports vs Named Exports.
 Default Exports -> Used to export one main component in file, only one per file possible.
-Named Exports -> Can be many in a file, i have to use the exact name while importing in another name.
+Named Exports -> Can be many in a file, i have to use the exact name while importing in another file.
 
 10.JSX (JavaScript XML).
  It is a syntax extension allow us to write HTML inside js.
@@ -222,6 +223,10 @@ split rendering into small units.
 
 33.Event pooling
  It is a perfomance optimization technique in react it reuses the synthetic events instead of recreating it.
+ Originally pooling was added to improve performance in old browsers.
+ But modern browsers:
+  are fast
+  handle garbage collection efficiently
 
  synthetic events(onClick,onChange) -> it wraps the actual/native events that makes/ensure the events behave the same in different browers.
 
@@ -255,7 +260,10 @@ split rendering into small units.
  let About = React.memo((props)=>{
 
  })
-
+ When parent component re-renders the memoized child component performs shallow comparison with the previous props and the new props. It will only rerender when new props changed.
+ If all props are equal, React skips rendering the component.
+ If any prop is different, React re-renders the component.
+ 
 42.useCallback(()=>,[]).
  It is used to memoize a function. It prevents unnecessary recreation of function while rendering.
 
@@ -278,6 +286,7 @@ split rendering into small units.
 
 44.HOC (Higher Order Componets);
  A componets that takes components and return a update Componet.
+ HOF -> A function that take function as argument or return a function.
 
 45.useReducer().
  Alternative as useState() it is used when state logic become complex.
@@ -517,3 +526,18 @@ function MyComponent() {
 74.BrowserRoutes vs HashRouter.
  BrowserRoutes -> enables proper routing for apps.
  HashRoutes -> Every thing after # stays in the browser, not sent to server. Server recives only example.com so refreash never breakes.
+
+75.Refreash Token Flow.
+Login
+  ↓
+Access Token(in response body) + Refresh Token(httpOnly cookie)
+  ↓
+Access APIs using Access Token
+  ↓
+Access Token Expires
+  ↓
+Send Refresh Token
+  ↓
+Get New Access Token
+  ↓
+Continue Using APIs

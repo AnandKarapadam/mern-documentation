@@ -80,6 +80,7 @@ ii.dehydration methods -> it fetches the required states app starts.
 
 14.Render props.
  It is a function passed as props to a component that decides what to render.
+ <DataProvider render={(data) => <h1>{data}</h1>} />
 
 15.Redux Toolkit
   It allow us to implement redux logic easily to our application.
@@ -103,7 +104,7 @@ ii.dehydration methods -> it fetches the required states app starts.
 20.Connect.
  Redux function used to connect react component to redux store. 
 
-21.Immer
+21.Immer 
  Immer is js library that let us to write code like we are mutating data, but actually keeps it immutable(unchanged) behind the scenes.
  It does not mutate the original it just create a new object with updated data.
 
@@ -136,8 +137,8 @@ ii.dehydration methods -> it fetches the required states app starts.
   ->Mainly used to get the height,width and position.
 
 25.context vs redux.
- context -> used to share data, avoids prop drilling, all consumers re-renders, simple structure.
- redux -> It handles the entire application states,only needed components re-render, well structured predictable data flow.
+ context(dependency injection tool-> inject to components what they need) -> used to share data, avoids prop drilling, all consumers re-renders, simple structure.
+ redux(does not inject, is stores state in centralized place) -> It handles the entire application states,only needed components re-render, well structured predictable data flow.
 
 26.Static vs Dynamic memory Allocation.
  Static Memory Allocation -> Memory is allocated at compile time. Size is fixed, cannot change later. Faster.

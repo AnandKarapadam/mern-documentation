@@ -135,7 +135,7 @@ d.Higher Order Function(HOF)
  A function that has a function as argument or return a function.
 
 e.First Class Function.
- A function is passed as an argument, or returned from a function.
+ A function that is treated as values.A function is passed as an argument, or returned from a function.
 
 f.Unary function.
  A function that takes one argument.
@@ -212,7 +212,7 @@ Null-> To represent intentional absence of value.
  ii.Execution Phase->Phase where the all the code is executed line by line.
 
 14.Call Stack
- Manintains the order of execution. Has a specific ordering LILO.
+ Manintains the order of execution. Has a specific ordering LIFO.
 
 15.Event Loop 
  Event loop is a mechanism that continuiosly check the call stack and handles asynchronous tasks.

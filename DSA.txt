@@ -68,6 +68,17 @@ Stack Overflow(too many function calls) -> Stack overflow in JavaScript occurs w
  Stack is a linear datastructure, stores data in LIFO order.(push,pop,top).
  ->call stack, undo-redo operations, browser back and forward navigation.
 
+Monotonic Stack(increasing/decreasing) - stack maintained in a specific order.
+
+Monotonic stacks are commonly used for:
+
+Next Greater Element
+Previous Greater Element
+Daily Temperatures
+Stock Span
+Largest Rectangle in Histogram
+
+
 8.Queue
  Queue is a linear datastructure, stores data in FIFO.(enqueue,dequeue).
  ->CPU scheduling,BFS.
