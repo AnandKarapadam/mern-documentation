@@ -85,6 +85,12 @@ JavaScript Topics
 65.Labels.
 66.Prototypal Pollution.
 67.Static methods vs Normal methods - class.
+68.Function Borrowing.
+69.Event Loop Latency.
+70.Abstract Equality Comparison Algorithm (==).
+71.Automatic Semicolon Insertion(ASI).
+72.Dynamic Imports.
+73.Module Scope.
 
 1.JavaScript(build by v8 engine)(js parses->convert into bytecode->JIT->execute)
 It is a interpreted language scripting language used to create webapplications interactive and dynamic. JS interpreted it dosen't need external compilation, js uses Just-In-Time compilation for execution.
@@ -295,7 +301,7 @@ console.log(sum(10,10)(10)(10,10)());
 
 24.Pass by value vs Pass by reference
 Pass by value-> when we pass primitives a copy is passed.
-Pass vy reference-> occures when we pass Non-primitives , reference is passed.
+Pass by reference-> occures when we pass Non-primitives , reference is passed.
 
 25.BOM Brower Object Model
 Allow as to interact with brower specific objects like alert(), propmt(), setTimeOut(),setInterval(),window.
@@ -558,3 +564,102 @@ let u = new User();
 u.greet();
 
 //We use static methods when the method does not depend on object-specific data.
+
+67.Function Borrowing.
+ It is technique that let us to use one objects method in another object without copying it.
+
+ const person1 = {
+  name:'Anand',
+  greet:function(city){
+    console.log(`Hello, I'am ${this.name} from ${city}`);
+  }
+ }
+
+ const person2 = {
+  name:'Juke'
+ }
+
+ person1.greet.call(person2,'Kochi');//Hello, I'am Anand from Kochi.
+
+
+68.Event loop latency.
+  Event loop latency in JavaScript is the delay between when a callback becomes ready to run and when the event loop actually gets a chance to execute it.
+Common causes include:
+
+CPU-intensive calculations
+Large synchronous loops
+Complex JSON parsing/stringifying
+Regular expressions on huge strings
+Synchronous file operations (Node.js)
+Long-running callbacks
+Garbage collection pauses.
+
+70.Abstract Equality Comparison Algorithm.
+  JavaScript performs type coresion when it is necessary.
+  x == y
+
+├── Same type?
+│     └── Compare directly.Numbers are compared by numeric value (NaN is never equal to anything, including itself).
+│
+├── null & undefined?
+│     └── true
+│
+├── Number ↔ String?
+│     └── Convert String → Number
+│
+├── Boolean?
+│     └── Convert Boolean → Number
+│
+├── Object ↔ Primitive?
+│     └── Convert Object → Primitive
+│
+├── BigInt involved?
+│     └── Apply BigInt comparison rules
+│
+└── Otherwise
+      └── false
+
+ example:
+[] == ![]
+
+↓
+[] == false        (! converts [] to true, then negates it)
+
+↓
+[] == 0            (false → 0)
+
+↓
+"" == 0            ([] → "" via ToPrimitive)
+
+↓
+0 == 0             ("" → 0)
+
+↓
+true
+
+71.Automatic Semicolon Insertion(ASI).
+ function fn() {
+    return
+    {
+        name: 'Anand'
+    }
+}
+
+console.log(fn());//undefined//A semicolon is inserted after return if there is a line break immediately after it.
+
+72.Dynamic Imports.
+console.log("Before");
+
+const module = await import("./greet.js");
+
+console.log("After");
+
+module.greet();
+
+///greet.js has console.log('hey');
+
+output: 'Before', 'hey', 'After'.
+in static import it will execute the greet.js first so output: 'hey','Before', 'After'.
+
+73.Module Scope.
+ Module scope means that variables, functions, and classes declared inside a JavaScript module are private to that file and cannot be accessed from other files unless they are explicitly exported.

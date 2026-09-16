@@ -190,11 +190,13 @@ Parallelism(executes) -> Executes multiple tasks at same time(parallely) using m
     iii.Child Process -> used to create new process that run independently that execute external scripts, shell commands in node application.
     iv.Thread Pooling -> Internal pool used by libuv for running tasks in background. By default 4-threads.
 
-17. Cluster Module
+17. Cluster Module(Horizontal scaling).
  Creates multiple node.js process to utilize multiple CPU cores.
+ cluster is for cloning the same Node.js server across multiple CPU cores so it can handle more incoming traffic (scaling up).
 
 18.Child Process
  Creates new process runs independently to handle external scripts, shell commands in node.js application.
+ Child Process is for delegating different tasks (like external scripts, OS commands, or heavy background jobs) to other CPU cores so they don't block your main application.
 
 19.Worker Thread.
  Allow node.js to run js in multiple threads.
